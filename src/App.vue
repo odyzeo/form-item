@@ -1,28 +1,55 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div
+    id="app"
+    class="app">
+    <div class="container">
+      <h1>ZIP</h1>
+      <form-item
+        :input="text"
+        :ref="text.name"
+      />
+      <h1>Textarea</h1>
+      <form-item
+        :input="textarea"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import FormItem from './components/FormItem.vue';
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    HelloWorld,
+    FormItem,
+  },
+  data() {
+    return {
+      initialInputValue: 'something',
+      textarea: {
+        name: 'textarea_name',
+        label: '',
+        type: 'textarea',
+        required: true,
+        validators: [],
+        autocomplete: 'off',
+        rows: 10,
+        placeholder: 'Description',
+      },
+      text: {
+        name: 'input_name',
+        label: 'ZIP',
+        type: 'text',
+        required: true,
+        validators: ['zip'],
+        autocomplete: 'off',
+      },
+    };
   },
 };
 </script>
 
 <style lang="less">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import '../src/less/app.less';
 </style>

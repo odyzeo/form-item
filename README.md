@@ -1,26 +1,137 @@
-# form-item
+# @odyzeo/form-item
 
-## Project setup
-```
-yarn install
-```
+Simple input and textarea Vue.js component.
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+## Installation
 
-### Compiles and minifies for production
+### npm
+
 ```
-yarn run build
+npm install --save @odyzeo/form-item
 ```
 
-### Run your tests
+### yarn
+
 ```
-yarn run test
+yarn add @odyzeo/form-item
 ```
 
-### Lints and fixes files
+Import component in your where you want to use it and register it:
+
 ```
-yarn run lint
+import 'FormItem' from '@odyzeo/form-item';
+export default {
+  components: { FormItem },
+}
 ```
+
+Import styles or make your own.
+
+```
+import '@odyzeo/form-item/dist/form-item.css';
+```
+
+## Usage
+
+```
+<template>
+  <h1>Input</h1>
+  <form-item
+    :input="text"
+    :value="initialTextValue"
+  />
+  <h1>Textarea</h1>
+  <form-item
+    :input="textarea"
+    :value="initialTextareaValue"
+  />
+</template>
+```
+
+```
+<script>
+import FormItem from '@odyzeo/form-item'
+
+export default {
+  name: 'App',
+  components: {
+    FormItem,
+  },
+  data() {
+    return {
+      initialInputValue: '',
+      initialTextareaValue: '',
+      textarea: {
+        name: 'textarea_name',
+        label: '',
+        type: 'textarea',
+        required: true,
+        validators: [],
+        autocomplete: 'off',
+        rows: 10,
+        placeholder: 'Description',
+      },
+      text: {
+        name: 'input_name',
+        label: 'Name',
+        type: 'text',
+        required: true,
+        validators: [],
+        autocomplete: 'off',
+      },
+    };
+  },
+};
+</script>
+```
+
+## Props
+
+### input - required
+| property name | type | description |
+| --- | --- | --- |
+| type | string | 'text', 'file' or 'textarea' |
+| required | boolean | if value is required |
+| readonly | boolean | ehm |
+| placeholder | string | ehm |
+| accept | string | what file types should be accepted if type is file |
+| validators | array | which validators should be used to validate input valu
+
+### value - optional
+This is the initial value of the form input/textarea.
+
+## Available validators
+- email
+- zip
+- tel : phone number
+- min : length of string
+- confirmed :
+- regex : your custom regex
+
+## Events
+Component emits these events:
+- focus
+- blur
+- input : emits with value of the element
+- keydown
+
+## CSS classes
+*TODO*
+
+## Development
+
+```
+npm run serve
+```
+
+or
+
+```bash
+yarn serve
+```
+
+
+# TODO
+- translate default texts in validators to english
+- allow custom validator texts with props
+- integrate some mask (v-mask or vue-inputmask or custom) for zip and phone

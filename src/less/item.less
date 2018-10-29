@@ -1,0 +1,143 @@
+@input-radius: 5px;
+@input-border-width: 2px;
+
+@form-label-color--light: #ccc;
+@form-input-color--light: #bbb;
+@form-input-background--light: #fff;
+@form-input-border--light: 1px solid #d7d7d7;
+@form-input-background--dark: #666;
+@form-label-color--dark: #999;
+@font-size--xsmall: 12px;
+@color--tag: #00f;
+@color--danger: #df4012;
+@color--focus: #f4a47d;
+@color--border: #50bccb;
+
+.form-item {
+  border-radius: @input-radius;
+  font-size: 16px;
+}
+
+.form-item__field {
+  position: relative;
+  background: @form-input-background--light;
+  border-radius: @input-radius;
+  border: @form-input-border--light;
+  transition: border .2s ease;
+}
+
+.form-item__field--empty {
+  border: 1px solid #d8d8dc;
+}
+
+.form-item__input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: @input-radius - @input-border-width;
+  padding: 30px 10px 10px;
+  background: @form-input-background--light;
+  resize: vertical;
+  appearance: none;
+
+  input& {
+    &::placeholder {
+      color: transparent;
+      transition: color .3s;
+    }
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
+  &:focus {
+    &::placeholder {
+      color: fadeOut(@form-label-color--dark, 10%);
+    }
+  }
+}
+
+.form-item__input--empty {
+  background-color: #fbfbfb;
+}
+
+.form-item__label {
+  box-sizing: border-box;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  z-index: 1;
+  color: #aaa7b4;
+  transition: all .3s;
+  pointer-events: none;
+}
+
+.form-item__input:focus + .form-item__label,
+.form-item--filled .form-item__label,
+.form-item--tags .form-item__label {
+  top: 10px;
+  font-size: 12px;
+  color: @form-label-color--dark;
+}
+
+.form-item--filled .form-item__field {
+  border-color: @color--border;
+}
+
+/**
+* Fix autofill label
+*/
+.form-item__input:-webkit-autofill + .form-item__label {
+  top: 10px;
+  font-size: 12px;
+  color: @form-label-color--dark;
+}
+
+/**
+* Input label modifier
+*/
+.form-item--no-label {
+  .form-item__input {
+    padding: 20px 10px;
+  }
+}
+
+.form-item__field:focus-within {
+  border-color: @color--focus;
+}
+
+.form-item__error {
+  padding: 3px 3px 0;
+  color: @color--danger;
+  font-size: @font-size--xsmall;
+  line-height: 1.1;
+}
+
+/**
+* Hider used for description label
+*/
+.form-item__hider {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 0;
+
+  height: 25px;
+  background: @form-input-background--light;
+  border-radius: @input-radius;
+
+  pointer-events: none;
+}
+
+/**
+* Form error state
+*/
+.form-item--error {
+  .form-item__field {
+    border-color: @color--danger;
+  }
+}
