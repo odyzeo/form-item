@@ -1,5 +1,5 @@
 {
-  "name": "form-item",
+  "name": "@odyzeo/form-item",
   "version": "1.0.0",
   "description": "Odyzeo form item component with Vue",
   "main": "dist/form-item.umd.js",
@@ -11,6 +11,9 @@
     "vue"
   ],
   "author": "Odyzeo <tomas.zamba@odyzeo.com, peter.baricic@odyzeo.com> (https://odyzeo.com)",
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "ISC",
   "scripts": {
     "serve": "vue-cli-service serve",
