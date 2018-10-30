@@ -3,10 +3,9 @@
     id="app"
     class="app">
     <div class="container">
-      <h1>ZIP</h1>
+      <h1>ZIP (with validator)</h1>
       <form-item
         :input="text"
-        :ref="text.name"
       />
       <h1>Textarea</h1>
       <form-item
