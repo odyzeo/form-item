@@ -91,9 +91,10 @@ export default {
 | property name | type | description |
 | --- | --- | --- |
 | type | string | 'text', 'file' or 'textarea' |
+| name | string | textarea or input name attribute |
 | required | boolean | if value is required |
-| readonly | boolean | ehm |
-| placeholder | string | ehm |
+| readonly | boolean |  |
+| placeholder | string |  |
 | accept | string | what file types should be accepted if type is file |
 | validators | array | which validators should be used to validate input valu
 
