@@ -28,13 +28,13 @@ export default {
       initialInputValue: 'something',
       textarea: {
         name: 'textarea_name',
-        label: '',
+        label: 'Textarea label (use this or placeholder)',
         type: 'textarea',
         required: true,
         validators: [],
         autocomplete: 'off',
         rows: 10,
-        placeholder: 'Description',
+        placeholder: '',
       },
       text: {
         name: 'input_name',
