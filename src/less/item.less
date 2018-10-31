@@ -4,6 +4,7 @@
 @form-label-color--light: #ccc;
 @form-input-color--light: #bbb;
 @form-input-background--light: #fff;
+@form-input-background--empty: #fbfbfb;
 @form-input-border--light: 1px solid #d7d7d7;
 @form-input-background--dark: #666;
 @form-label-color--dark: #999;
@@ -61,7 +62,7 @@
 }
 
 .form-item__input--empty {
-  background-color: #fbfbfb;
+  background-color: @form-input-background--empty;
 }
 
 .form-item__label {
@@ -126,11 +127,17 @@
   left: 0;
   z-index: 0;
 
-  height: 25px;
+  height: 30px;
   background: @form-input-background--light;
   border-radius: @input-radius;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 
   pointer-events: none;
+}
+
+.form-item__hider--empty {
+  background: @form-input-background--empty;
 }
 
 /**

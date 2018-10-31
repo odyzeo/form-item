@@ -8,7 +8,7 @@
     <div :class="['form-item__field', {'form-item__field--empty': localValue === ''}]">
       <div
         v-if="isTextArea && input.label"
-        class="form-item__hider"
+        :class="['form-item__hider', {'form-item__hider--empty': localValue === ''}]"
       />
       <textarea
         v-if="isTextArea"
