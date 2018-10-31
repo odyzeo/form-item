@@ -93,10 +93,12 @@ export default {
 | type | string | 'text', 'file' or 'textarea' |
 | name | string | textarea or input name attribute |
 | required | boolean | if value is required |
-| readonly | boolean |  |
-| placeholder | string |  |
+| readonly | boolean | if field is read only |
+| placeholder | string | placeholder for input/textarea |
 | accept | string | what file types should be accepted if type is file |
-| validators | array | which validators should be used to validate input valu
+| validators | array | which validators should be used to validate input value |
+| rows | number | how many rows should textarea have |
+| autocomplete | string | HTML5 autocomplete attribute, default is 'off', check [docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for more info and possible values |
 
 ### value - optional
 This is the initial value of the form input/textarea.
