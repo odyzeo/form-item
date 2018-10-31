@@ -48,7 +48,7 @@
       <label
         v-if="input.label && input.type !== 'file'"
         :for="uid"
-        class="form-item__label"
+        :class="['form-item__label', { 'form-item__label--with-placeholder': input.placeholder }]"
       >
         {{ input.label }}
       </label>
