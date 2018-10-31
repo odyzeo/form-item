@@ -136,3 +136,6 @@ yarn serve
 - translate default texts in validators to english
 - allow custom validator texts with props
 - integrate some mask (v-mask or vue-inputmask or custom) for zip and phone
+- add total maxLength to textarea
+- add maxLength per line to textarea
+- add maxRows to textarea
