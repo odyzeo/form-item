@@ -99,7 +99,7 @@ export default {
     return {
       autocomplete,
       type,
-      localValue: this.value,
+      localValue: this.value || '',
       errors: [],
       validating: false,
       isTextArea: type === 'textarea',
@@ -132,7 +132,7 @@ export default {
     },
     validate(scroll = false) {
       this.errors = [];
-      if (this.localValue.length <= 0) {
+      if (this.localValue && this.localValue.length === 0) {
         if (this.input.required) {
           this.errors.push(this.msgRequired);
         }
