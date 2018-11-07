@@ -1,7 +1,7 @@
 <template>
   <div
     :class="['form-item', {
-      'form-item--filled': localValue.length,
+      'form-item--filled': localValue && localValue.length > 0,
       'form-item--error': errors.length || (formErrors.length && showFormErrors),
       'form-item--no-label': !input.label || input.type === 'file'
   }]">
