@@ -132,7 +132,7 @@ export default {
     },
     validate(scroll = false) {
       this.errors = [];
-      if (this.localValue && this.localValue.length === 0) {
+      if (this.localValue.length === 0) {
         if (this.input.required) {
           this.errors.push(this.msgRequired);
         }
