@@ -87,6 +87,10 @@ export default {
       type: String,
       default: '',
     },
+    msgRequired: {
+      type: String,
+      default: 'This field is required',
+    },
   },
   data() {
     const autocomplete = this.input.autocomplete || 'off';
@@ -95,7 +99,6 @@ export default {
     return {
       autocomplete,
       type,
-      msgRequired: 'Pole je povinné',
       localValue: this.value,
       errors: [],
       validating: false,

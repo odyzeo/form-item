@@ -103,6 +103,9 @@ export default {
 ### value - optional
 This is the initial value of the form input/textarea.
 
+### msg-required - optional
+Error message for required field
+
 ## Available validators
 - email
 - zip
