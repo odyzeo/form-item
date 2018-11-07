@@ -35,16 +35,23 @@ import '@odyzeo/form-item/dist/form-item.css';
 
 ```
 <template>
-  <h1>Input</h1>
-  <form-item
-    :input="text"
-    :value="initialTextValue"
-  />
-  <h1>Textarea</h1>
-  <form-item
-    :input="textarea"
-    :value="initialTextareaValue"
-  />
+  <div>
+    <h1>Text</h1>
+    <form-item
+      :input="text"
+      v-model="textValue"
+    />
+    <h1>ZIP (with validator)</h1>
+    <form-item
+      :input="zip"
+      v-model="zipValue"
+    />
+    <h1>Textarea</h1>
+    <form-item
+      :input="textarea"
+      v-model="textareaValue"
+    />
+  </div>
 </template>
 ```
 
@@ -59,17 +66,26 @@ export default {
   },
   data() {
     return {
-      initialInputValue: '',
-      initialTextareaValue: '',
+      textValue: 'some text',
+      zipValue: '',
+      textareaValue: '',
+      zip: {
+        name: 'input_zip',
+        label: 'ZIP',
+        type: 'text',
+        required: true,
+        validators: ['zip'],
+        autocomplete: 'off',
+      },
       textarea: {
         name: 'textarea_name',
-        label: '',
+        label: 'Textarea label (use this or placeholder)',
         type: 'textarea',
         required: true,
         validators: [],
         autocomplete: 'off',
         rows: 10,
-        placeholder: 'Description',
+        placeholder: '',
       },
       text: {
         name: 'input_name',

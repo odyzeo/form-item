@@ -3,13 +3,20 @@
     id="app"
     class="app">
     <div class="container">
-      <h1>ZIP (with validator)</h1>
+      <h1>Text</h1>
       <form-item
         :input="text"
+        v-model="textValue"
+      />
+      <h1>ZIP (with validator)</h1>
+      <form-item
+        :input="zip"
+        v-model="zipValue"
       />
       <h1>Textarea</h1>
       <form-item
         :input="textarea"
+        v-model="textareaValue"
       />
     </div>
   </div>
@@ -25,7 +32,17 @@ export default {
   },
   data() {
     return {
-      initialInputValue: 'something',
+      textValue: 'some text',
+      zipValue: '',
+      textareaValue: '',
+      zip: {
+        name: 'input_zip',
+        label: 'ZIP',
+        type: 'text',
+        required: true,
+        validators: ['zip'],
+        autocomplete: 'off',
+      },
       textarea: {
         name: 'textarea_name',
         label: 'Textarea label (use this or placeholder)',
@@ -38,10 +55,10 @@ export default {
       },
       text: {
         name: 'input_name',
-        label: 'ZIP',
+        label: 'Name',
         type: 'text',
         required: true,
-        validators: ['zip'],
+        validators: [],
         autocomplete: 'off',
       },
     };
