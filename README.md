@@ -19,7 +19,7 @@ yarn add @odyzeo/form-item
 Import component in your where you want to use it and register it:
 
 ```
-import 'FormItem' from '@odyzeo/form-item';
+import FormItem from '@odyzeo/form-item';
 export default {
   components: { FormItem },
 }
