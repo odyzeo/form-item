@@ -135,14 +135,13 @@ export default {
       if (
         this.input.required &&
         (
-          this.localValue === null || (this.localValue && this.localValue.length === 0)
+          this.localValue === null || this.localValue === ''
         )
       ) {
         this.errors.push(this.msgRequired);
       } else if (
         this.localValue !== null &&
-        this.localValue &&
-        this.localValue.length > 0 &&
+        this.localValue !== '' &&
         this.input.validators
       ) {
         this.input.validators.forEach((rawValidator) => {
