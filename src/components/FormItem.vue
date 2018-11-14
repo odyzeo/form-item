@@ -132,11 +132,19 @@ export default {
     },
     validate(scroll = false) {
       this.errors = [];
-      if (this.localValue.length === 0) {
-        if (this.input.required) {
-          this.errors.push(this.msgRequired);
-        }
-      } else if (this.input.validators) {
+      if (
+        this.input.required &&
+        (
+          this.localValue === null || (this.localValue && this.localValue.length === 0)
+        )
+      ) {
+        this.errors.push(this.msgRequired);
+      } else if (
+        this.localValue !== null &&
+        this.localValue &&
+        this.localValue.length > 0 &&
+        this.input.validators
+      ) {
         this.input.validators.forEach((rawValidator) => {
           const [command, rawAttrs] = rawValidator.split(':');
           const attrs = rawAttrs ? rawAttrs.split(',') : [];
