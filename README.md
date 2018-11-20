@@ -92,6 +92,7 @@ export default {
         label: 'Name',
         type: 'text',
         required: true,
+        group: true,
         validators: [],
         autocomplete: 'off',
       },
@@ -110,6 +111,7 @@ export default {
 | name | string | textarea or input name attribute |
 | required | boolean | if value is required |
 | readonly | boolean | if field is read only |
+| group | boolean | set to true if using prepend/append, don't use for textarea (yet) |
 | placeholder | string | placeholder for input/textarea |
 | accept | string | what file types should be accepted if type is file |
 | validators | array | which validators should be used to validate input value |

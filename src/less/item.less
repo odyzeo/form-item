@@ -13,6 +13,7 @@
 @color--danger: #df4012;
 @color--focus: #f4a47d;
 @color--border: #50bccb;
+@color--lighter-grey: #e6e6e6;
 
 .form-item {
   border-radius: @input-radius;
@@ -152,4 +153,27 @@
   .form-item__field {
     border-color: @color--danger;
   }
+}
+
+.form-item__field--group {
+  display: flex;
+  overflow: hidden;
+}
+
+.form-item__readonly {
+  background: @form-input-color--light;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0 15px;
+
+  background: @color--lighter-grey;
+
+  line-height: 1;
+}
+
+.form-item__wrapper {
+  position: relative;
+  flex: 1 1 auto;
 }

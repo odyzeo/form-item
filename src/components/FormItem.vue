@@ -5,54 +5,63 @@
       'form-item--error': errors.length || (formErrors.length && showFormErrors),
       'form-item--no-label': !input.label || input.type === 'file'
   }]">
-    <div :class="['form-item__field', {'form-item__field--empty': localValue === ''}]">
+    <div
+      :class="[
+        'form-item__field',
+        {'form-item__field--empty': localValue === ''},
+        {'form-item__field--group': input.group}]">
+      <slot name="prepend" />
       <div
         v-if="isTextArea && input.label"
         :class="['form-item__hider', {'form-item__hider--empty': localValue === ''}]"
       />
-      <textarea
-        v-if="isTextArea"
-        ref="input"
-        :class="['form-item__input', {'form-item__input--empty': localValue === ''}]"
-        v-model="localValue"
-        :id="uid"
-        :name="input.name"
-        :required="input.required"
-        :readonly="input.readonly"
-        :autocomplete="autocomplete"
-        :rows="input.rows"
-        :placeholder="input.placeholder"
-        @focus="focus"
-        @blur="blur"
-        @input="change"
-        @keydown="keydown"
-      />
-      <input
-        v-else
-        ref="input"
-        :class="['form-item__input', {'form-item__input--empty': localValue === ''}]"
-        v-model="localValue"
-        :id="uid"
-        :type="type"
-        :name="input.name"
-        :required="input.required"
-        :readonly="input.readonly"
-        :autocomplete="autocomplete"
-        :placeholder="input.placeholder"
-        :accept="input.accept"
-        @focus="focus"
-        @blur="blur"
-        @input="change"
-        @keydown="keydown"
-      >
-      <label
-        v-if="input.label && input.type !== 'file'"
-        :for="uid"
-        :class="['form-item__label', { 'form-item__label--with-placeholder': input.placeholder }]"
-      >
-        {{ input.label }}
-      </label>
+      <div class="form-item__wrapper">
+        <textarea
+          v-if="isTextArea"
+          ref="input"
+          :class="['form-item__input', {'form-item__input--empty': localValue === ''}]"
+          v-model="localValue"
+          :id="uid"
+          :name="input.name"
+          :required="input.required"
+          :readonly="input.readonly"
+          :autocomplete="autocomplete"
+          :rows="input.rows"
+          :placeholder="input.placeholder"
+          @focus="focus"
+          @blur="blur"
+          @input="change"
+          @keydown="keydown"
+        />
+        <input
+          v-else
+          ref="input"
+          :class="['form-item__input', {'form-item__input--empty': localValue === ''}]"
+          v-model="localValue"
+          :id="uid"
+          :type="type"
+          :name="input.name"
+          :required="input.required"
+          :readonly="input.readonly"
+          :autocomplete="autocomplete"
+          :placeholder="input.placeholder"
+          :accept="input.accept"
+          @focus="focus"
+          @blur="blur"
+          @input="change"
+          @keydown="keydown"
+        >
+        <label
+          v-if="input.label && input.type !== 'file'"
+          :for="uid"
+          :class="['form-item__label', { 'form-item__label--with-placeholder': input.placeholder }]"
+        >
+          {{ input.label }}
+        </label>
+      </div>
+      <slot name="append" />
     </div>
+    <slot name="result" />
     <div
       v-for="(error, key) in errors"
       :key="`fe_error_${key}`"
@@ -90,6 +99,10 @@ export default {
     msgRequired: {
       type: String,
       default: 'This field is required',
+    },
+    results: {
+      type: Array,
+      default: () => [],
     },
   },
   data() {

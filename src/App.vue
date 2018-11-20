@@ -3,11 +3,19 @@
     id="app"
     class="app">
     <div class="container">
-      <h1>Text</h1>
+      <h1>Text with prepend and append</h1>
       <form-item
         :input="text"
         v-model="textValue"
-      />
+        :results="results"
+      >
+        <template slot="prepend">
+          <div class="form-item__readonly">prepend</div>
+        </template>
+        <template slot="append">
+          <div class="form-item__readonly">append</div>
+        </template>
+      </form-item>
       <h1>ZIP (with validator)</h1>
       <form-item
         :input="zip"
@@ -59,6 +67,7 @@ export default {
         type: 'text',
         required: true,
         validators: [],
+        group: true,
         autocomplete: 'off',
       },
     };
