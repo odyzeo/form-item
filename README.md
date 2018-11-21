@@ -107,7 +107,7 @@ export default {
 ### input - required
 | property name | type | description |
 | --- | --- | --- |
-| type | string | 'text', 'file' or 'textarea' |
+| type | string | 'textarea' and [all](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) html5 input types supports |
 | name | string | textarea or input name attribute |
 | required | boolean | if value is required |
 | readonly | boolean | if field is read only |
