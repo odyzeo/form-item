@@ -7,7 +7,7 @@
       <form-item
         :input="text"
         v-model="textValue"
-        :results="results"
+        class="form-item--group"
       >
         <template slot="prepend">
           <div class="form-item__readonly">prepend</div>

@@ -28,10 +28,6 @@
   transition: border .2s ease;
 }
 
-.form-item__field--empty {
-  border: 1px solid #d8d8dc;
-}
-
 .form-item__input {
   box-sizing: border-box;
   display: block;
@@ -61,10 +57,6 @@
       color: fadeOut(@form-label-color--dark, 10%);
     }
   }
-}
-
-.form-item__input--empty {
-  background-color: @form-input-background--empty;
 }
 
 .form-item__label {
@@ -142,10 +134,6 @@
   pointer-events: none;
 }
 
-.form-item__hider--empty {
-  background: @form-input-background--empty;
-}
-
 /**
 * Form error state
 */
@@ -155,9 +143,11 @@
   }
 }
 
-.form-item__field--group {
-  display: flex;
-  overflow: hidden;
+.form-item--group {
+  .form-item__field {
+    display: flex;
+    overflow: hidden;
+  }
 }
 
 .form-item__readonly {
