@@ -36,21 +36,15 @@ import '@odyzeo/form-item/dist/form-item.css';
 ```
 <template>
   <div>
-    <h1>Text</h1>
-    <form-item
-      :input="text"
-      v-model="textValue"
-    />
-    <h1>ZIP (with validator)</h1>
-    <form-item
-      :input="zip"
-      v-model="zipValue"
-    />
-    <h1>Textarea</h1>
-    <form-item
-      :input="textarea"
-      v-model="textareaValue"
-    />
+      <form-item
+        :input="simple"
+        v-model="simple.value"
+      ></form-item>
+      
+      <form-item
+        :input="full"
+        v-model="full.value"
+      ></form-item>
   </div>
 </template>
 ```
@@ -66,35 +60,22 @@ export default {
   },
   data() {
     return {
-      textValue: 'some text',
-      zipValue: '',
-      textareaValue: '',
-      zip: {
-        name: 'input_zip',
-        label: 'ZIP',
-        type: 'text',
-        required: true,
-        validators: ['zip'],
-        autocomplete: 'off',
+      simple: {
+        label: 'Simple',
+        value: '',
       },
-      textarea: {
-        name: 'textarea_name',
-        label: 'Textarea label (use this or placeholder)',
-        type: 'textarea',
+      full: {
+        type: 'email',
+        name: 'email',
         required: true,
-        validators: [],
-        autocomplete: 'off',
-        rows: 10,
-        placeholder: '',
-      },
-      text: {
-        name: 'input_name',
-        label: 'Name',
-        type: 'text',
-        required: true,
-        group: true,
-        validators: [],
-        autocomplete: 'off',
+        readonly: false,
+        placeholder: 'example@odyzeo.com',
+        accept: '', // Just for input type 'file'
+        validators: ['email'],
+        rows: 0, // Just for input type 'textarea'
+        autocomplete: 'username email',
+        label: 'E-mail',
+        value: '',
       },
     };
   },
@@ -104,42 +85,40 @@ export default {
 
 ## Props
 
-### input - required
-| property name | type | description |
-| --- | --- | --- |
-| type | string | 'textarea' and [all](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) html5 input types supports |
-| name | string | textarea or input name attribute |
-| required | boolean | if value is required |
-| readonly | boolean | if field is read only |
-| placeholder | string | placeholder for input/textarea |
-| accept | string | what file types should be accepted if type is file |
-| validators | array | which validators should be used to validate input value |
-| rows | number | how many rows should textarea have |
-| autocomplete | string | HTML5 autocomplete attribute, default is 'off', check [docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for more info and possible values |
+### input {Object} -  required
+| Property name | Type | Default value | Description |
+| ------------- | ---- | ------- | ----------- |
+| `type` | string | `text` | Supports 'textarea' and [all](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) html5 input types supports |
+| `name` | string | | Textarea or input `name` attribute |
+| `label` | string | `''` | Label name for input |
+| `required` | boolean | `false` | If value is required |
+| `readonly` | boolean | `false` | If field is read only |
+| `placeholder` | string |  | Native placeholder attribute for input/textarea |
+| `accept` | string |  | Which file types should be accepted if type is file |
+| `validators` | array | `[]` | Which validators should be used to validate input value |
+| `rows` | number |  | Number of rows textarea should have |
+| `autocomplete` | string | `off` | HTML5 autocomplete attribute, check [docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for more info and possible values |
 
-### value - optional
+### value {String} - optional
 This is the initial value of the form input/textarea.
 
-### msg-required - optional
+### msg-required {String} - optional
 Error message for required field
 
 ## Available validators
-- email
-- zip
-- tel : phone number
-- min : length of string
-- confirmed :
-- regex : your custom regex
+- `email`
+- `zip`
+- `tel` : phone number
+- `min` : length of string
+- `confirmed `: confirmed passwords
+- `regex` : your custom regex
 
 ## Events
 Component emits these events:
-- focus
-- blur
-- input : emits with value of the element
-- keydown
-
-## CSS classes
-*TODO*
+- `focus`
+- `blur`
+- `input` : emits with value of the element
+- `keydown`
 
 ## Development
 
@@ -153,8 +132,8 @@ or
 yarn serve
 ```
 
-
 # TODO
+- validate on custom events, e.g. form submit not just on blur
 - translate default texts in validators to english
 - allow custom validator texts with props
 - integrate some mask (v-mask or vue-inputmask or custom) for zip and phone

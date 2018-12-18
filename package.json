@@ -55,7 +55,9 @@
       "@vue/airbnb"
     ],
     "rules": {
-      "no-underscore-dangle": 0
+      "no-underscore-dangle": 0,
+      "vue/html-self-closing": 0,
+      "vue/attributes-order": 0
     },
     "parserOptions": {
       "parser": "babel-eslint"

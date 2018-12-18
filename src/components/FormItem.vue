@@ -1,22 +1,21 @@
 <template>
   <div
-    :class="{
-      'form-item--filled': localValue && localValue.length > 0,
-      'form-item--error': errors.length || (formErrors.length && showFormErrors),
-      'form-item--no-label': !input.label || input.type === 'file'
-    }"
     class="form-item"
+    :class="{
+      'form-item--filled': isFilled,
+      'form-item--error': isErrorClass,
+      'form-item--no-label': hideLabel,
+    }"
   >
-    <div
-      class="form-item__field"
-    >
-      <slot name="prepend" />
+    <div class="form-item__field">
+      <slot name="prepend"></slot>
       <div
-        v-if="isTextArea && input.label"
         class="form-item__hider"
-      />
+        v-if="showHider"
+      ></div>
       <div class="form-item__wrapper">
         <textarea
+          class="form-item__input"
           v-if="isTextArea"
           ref="input"
           v-model="localValue"
@@ -27,13 +26,13 @@
           :autocomplete="autocomplete"
           :rows="input.rows"
           :placeholder="input.placeholder"
-          class="form-item__input"
           @focus="focus"
           @blur="blur"
           @input="change"
           @keydown="keydown"
-        />
+        ></textarea>
         <input
+          class="form-item__input"
           v-else
           ref="input"
           v-model="localValue"
@@ -45,36 +44,35 @@
           :autocomplete="autocomplete"
           :placeholder="input.placeholder"
           :accept="input.accept"
-          class="form-item__input"
           @focus="focus"
           @blur="blur"
           @input="change"
           @keydown="keydown"
         >
         <label
-          v-if="input.label && input.type !== 'file'"
+          class="form-item__label"
+          v-if="showLabel"
           :for="uid"
-          :class="['form-item__label', { 'form-item__label--with-placeholder': input.placeholder }]"
         >
           {{ input.label }}
         </label>
       </div>
-      <slot name="append" />
+      <slot name="append"></slot>
     </div>
-    <slot name="result" />
+    <slot name="result"></slot>
     <div
+      class="form-item__error"
       v-for="(error, key) in errors"
       :key="`fe_error_${key}`"
-      class="form-item__error"
       v-html="error"
-    />
+    ></div>
     <div v-if="showFormErrors">
       <div
+        class="form-item__error"
         v-for="(error, key) in formErrors"
         :key="`be_error_${key}`"
-        class="form-item__error"
         v-html="error"
-      />
+      ></div>
     </div>
   </div>
 </template>
@@ -100,10 +98,6 @@ export default {
       type: String,
       default: 'This field is required',
     },
-    results: {
-      type: Array,
-      default: () => [],
-    },
   },
   data() {
     const autocomplete = this.input.autocomplete || 'off';
@@ -122,6 +116,21 @@ export default {
   computed: {
     uid() {
       return `form-item-${this._uid}`;
+    },
+    isFilled() {
+      return typeof this.localValue !== 'undefined' && `${this.localValue}`.length > 0;
+    },
+    isErrorClass() {
+      return this.errors.length || (this.formErrors.length && this.showFormErrors);
+    },
+    hideLabel() {
+      return !this.input.label || this.input.type === 'file';
+    },
+    showLabel() {
+      return this.input.label && this.input.type !== 'file';
+    },
+    showHider() {
+      return this.isTextArea && this.input.label;
     },
   },
   watch: {
@@ -181,5 +190,5 @@ export default {
 </script>
 
 <style lang="less">
-@import '../less/item.less';
+@import '../less/form-item.less';
 </style>

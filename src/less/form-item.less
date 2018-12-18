@@ -40,6 +40,7 @@
   appearance: none;
   resize: none;
 
+  textarea&,
   input& {
     &::placeholder {
       color: transparent;
@@ -68,10 +69,6 @@
   color: #aaa7b4;
   transition: all .3s;
   pointer-events: none;
-}
-
-.form-item__label--with-placeholder {
-  top: 10px;
 }
 
 .form-item__input:focus + .form-item__label,
@@ -123,13 +120,11 @@
   top: 0;
   right: 0;
   left: 0;
-  z-index: 0;
+  z-index: 1;
 
   height: 30px;
   background: @form-input-background--light;
-  border-radius: @input-radius;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+  border-radius: @input-radius @input-radius 0 0;
 
   pointer-events: none;
 }

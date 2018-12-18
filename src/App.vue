@@ -3,29 +3,56 @@
     id="app"
     class="app">
     <div class="container">
-      <h1>Text with prepend and append</h1>
+      <h1 class="text-center">Form item</h1>
+
+      <h3>Simple: {{ simple.value }}</h3>
       <form-item
-        :input="text"
-        v-model="textValue"
+        :input="simple"
+        v-model="simple.value"
+      ></form-item>
+
+      <h3>Full example: {{ full.value }}</h3>
+      <form-item
+        :input="full"
+        v-model="full.value"
+        :msg-required="requiredMessage"
+        :form-errors="formErrors.full"
         class="form-item--group"
       >
         <template slot="prepend">
-          <div class="form-item__readonly">prepend</div>
+          <div class="form-item__readonly">Your</div>
         </template>
         <template slot="append">
-          <div class="form-item__readonly">append</div>
+          <div class="form-item__readonly">Please</div>
         </template>
       </form-item>
-      <h1>ZIP (with validator)</h1>
+
+      <a
+        href
+        v-if="isFormErrors"
+        @click.prevent="clear"
+      >
+        Clear BE errors
+      </a>
+      <a
+        href
+        v-else
+        @click.prevent="submit"
+      >
+        Submit to show BE errors
+      </a>
+
+      <h3>ZIP (with validator): {{ zip.value }}</h3>
       <form-item
         :input="zip"
-        v-model="zipValue"
-      />
-      <h1>Textarea</h1>
+        v-model="zip.value"
+      ></form-item>
+
+      <h3>Textarea: {{ textarea.value }}</h3>
       <form-item
         :input="textarea"
-        v-model="textareaValue"
-      />
+        v-model="textarea.value"
+      ></form-item>
     </div>
   </div>
 </template>
@@ -40,37 +67,57 @@ export default {
   },
   data() {
     return {
-      textValue: 'some text',
-      zipValue: '',
-      textareaValue: '',
+      requiredMessage: 'Povinné',
+      formErrors: {},
+      simple: {
+        label: 'Simple',
+        value: '',
+      },
+      full: {
+        type: 'email',
+        name: 'email',
+        required: true,
+        readonly: false,
+        placeholder: 'example@odyzeo.com',
+        accept: '', // Just for input type 'file'
+        validators: ['email'],
+        rows: 0, // Just for input type 'textarea'
+        autocomplete: 'username email',
+        label: 'E-mail',
+        value: '',
+      },
       zip: {
-        name: 'input_zip',
+        name: 'zip',
+        placeholder: 'placeholder',
         label: 'ZIP',
-        type: 'text',
         required: true,
         validators: ['zip'],
-        autocomplete: 'off',
+        value: '',
       },
       textarea: {
-        name: 'textarea_name',
-        label: 'Textarea label (use this or placeholder)',
+        name: 'textarea',
         type: 'textarea',
-        required: true,
-        validators: [],
-        autocomplete: 'off',
+        label: 'Textarea',
+        placeholder: 'Textarea placeholder',
         rows: 10,
-        placeholder: '',
-      },
-      text: {
-        name: 'input_name',
-        label: 'Name',
-        type: 'text',
-        required: true,
-        validators: [],
-        group: true,
-        autocomplete: 'off',
+        value: 'Some text just for textarea',
       },
     };
+  },
+  computed: {
+    isFormErrors() {
+      return Object.keys(this.formErrors).length > 0;
+    },
+  },
+  methods: {
+    submit() {
+      this.formErrors = {
+        full: ['Some BE error'],
+      };
+    },
+    clear() {
+      this.formErrors = {};
+    },
   },
 };
 </script>
