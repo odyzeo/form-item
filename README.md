@@ -21,7 +21,9 @@ Import component in your where you want to use it and register it:
 ```
 import FormItem from '@odyzeo/form-item';
 export default {
-  components: { FormItem },
+  components: {
+    FormItem,
+  },
 }
 ```
 
@@ -87,7 +89,7 @@ export default {
 
 ### input {Object} -  required
 | Property name | Type | Default value | Description |
-| ------------- | ---- | ------- | ----------- |
+| ------------- | ---- | ------------- | ----------- |
 | `type` | string | `text` | Supports 'textarea' and [all](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) html5 input types supports |
 | `name` | string | | Textarea or input `name` attribute |
 | `label` | string | `''` | Label name for input |
@@ -99,10 +101,13 @@ export default {
 | `rows` | number |  | Number of rows textarea should have |
 | `autocomplete` | string | `off` | HTML5 autocomplete attribute, check [docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for more info and possible values |
 
-### value {String} - optional
+### value {string} - optional
 This is the initial value of the form input/textarea.
 
-### msg-required {String} - optional
+### formErrors {array} - optional
+Array of errors to display.
+
+### msgRequired {string} - optional
 Error message for required field
 
 ## Available validators
