@@ -46,7 +46,17 @@ import '@odyzeo/form-item/dist/form-item.css';
       <form-item
         :input="full"
         v-model="full.value"
-      ></form-item>
+        :msg-required="requiredMessage"
+        :form-errors="formErrors.full"
+        class="form-item--group"
+      >
+        <template slot="prepend">
+          <div class="form-item__readonly">Your</div>
+        </template>
+        <template slot="append">
+          <div class="form-item__readonly">Please</div>
+        </template>
+      </form-item>
   </div>
 </template>
 ```
@@ -79,6 +89,8 @@ export default {
         label: 'E-mail',
         value: '',
       },
+      requiredMessage: 'Povinné',
+      formErrors: {},
     };
   },
 };
