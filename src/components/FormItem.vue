@@ -4,7 +4,7 @@
     :class="{
       'form-item--filled': isFilled,
       'form-item--error': isErrorClass,
-      'form-item--no-label': hideLabel,
+      'form-item--no-label': !showLabel,
     }"
   >
     <div class="form-item__field">
@@ -87,7 +87,7 @@ export default {
       required: true,
     },
     formErrors: {
-      type: Array,
+      type: [Array, Object],
       default: () => [],
     },
     value: {
@@ -123,9 +123,6 @@ export default {
     isErrorClass() {
       return this.errors.length || (this.formErrors.length && this.showFormErrors);
     },
-    hideLabel() {
-      return !this.input.label || this.input.type === 'file';
-    },
     showLabel() {
       return this.input.label && this.input.type !== 'file';
     },
@@ -134,11 +131,13 @@ export default {
     },
   },
   watch: {
-    value(n, o) {
-      this.localValue = n;
-      if (typeof o !== 'undefined' && n !== o) {
-        this.showFormErrors = false;
-      }
+    value(n) {
+      this.localValue = (typeof n === 'undefined') ? '' : n;
+      /**
+       * When value change hide errors.
+       * @type {boolean}
+       */
+      this.showFormErrors = false;
     },
     formErrors() {
       this.showFormErrors = true;
