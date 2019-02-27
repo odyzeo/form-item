@@ -18,6 +18,8 @@
         :msg-required="requiredMessage"
         :form-errors="formErrors.full"
         class="form-item--group"
+        :bind-to-input="{ 'data-hj-whitelist': true }"
+        input-class="custom-class-for-input"
       >
         <template slot="prepend">
           <div class="form-item__readonly">Your</div>

@@ -16,6 +16,7 @@
       <div class="form-item__wrapper">
         <textarea
           class="form-item__input"
+          :class="inputClass"
           v-if="isTextArea"
           ref="input"
           v-model="localValue"
@@ -26,6 +27,7 @@
           :autocomplete="autocomplete"
           :rows="input.rows"
           :placeholder="input.placeholder"
+          v-bind="bindToInput"
           @focus="focus"
           @blur="blur"
           @input="change"
@@ -33,6 +35,7 @@
         ></textarea>
         <input
           class="form-item__input"
+          :class="inputClass"
           v-else
           ref="input"
           v-model="localValue"
@@ -44,6 +47,7 @@
           :autocomplete="autocomplete"
           :placeholder="input.placeholder"
           :accept="input.accept"
+          v-bind="bindToInput"
           @focus="focus"
           @blur="blur"
           @input="change"
@@ -97,6 +101,14 @@ export default {
     msgRequired: {
       type: String,
       default: 'This field is required',
+    },
+    bindToInput: {
+      type: Object,
+      default: () => {},
+    },
+    inputClass: {
+      type: String,
+      default: '',
     },
   },
   data() {

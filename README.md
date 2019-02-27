@@ -49,6 +49,8 @@ import '@odyzeo/form-item/dist/form-item.css';
         :msg-required="requiredMessage"
         :form-errors="formErrors.full"
         class="form-item--group"
+        :bind-to-input="{ 'data-hj-whitelist': true }"
+        input-class="custom-class-for-input"
       >
         <template slot="prepend">
           <div class="form-item__readonly">Your</div>
@@ -129,6 +131,12 @@ Error message for required field
 - `min` : length of string
 - `confirmed `: confirmed passwords
 - `regex` : your custom regex
+
+### bindToInput {Object} - optional
+Used for generating custom attributes to input/textarea element.
+
+### inputClass {string} - optional
+Used for adding custom class to input/textarea element.
 
 ## Events
 Component emits these events:
