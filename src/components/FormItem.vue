@@ -47,6 +47,7 @@
           :autocomplete="autocomplete"
           :placeholder="input.placeholder"
           :accept="input.accept"
+          :pattern="input.pattern"
           v-bind="bindToInput"
           @focus="focus"
           @blur="blur"

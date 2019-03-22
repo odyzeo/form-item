@@ -86,6 +86,7 @@ export default {
         rows: 0, // Just for input type 'textarea'
         autocomplete: 'username email',
         label: 'E-mail',
+        pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$',
         value: '',
       },
       zip: {

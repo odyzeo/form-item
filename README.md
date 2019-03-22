@@ -105,15 +105,16 @@ export default {
 | Property name | Type | Default value | Description |
 | ------------- | ---- | ------------- | ----------- |
 | `type` | string | `text` | Supports 'textarea' and [all](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) html5 input types supports |
-| `name` | string | | Textarea or input `name` attribute |
+| `name` | string | `` | Textarea or input `name` attribute |
 | `label` | string | `''` | Label name for input |
 | `required` | boolean | `false` | If value is required |
 | `readonly` | boolean | `false` | If field is read only |
-| `placeholder` | string |  | Native placeholder attribute for input/textarea |
+| `placeholder` | string | `` | Native placeholder attribute for input/textarea |
 | `accept` | string |  | Which file types should be accepted if type is file |
 | `validators` | array | `[]` | Which validators should be used to validate input value |
-| `rows` | number |  | Number of rows textarea should have |
+| `rows` | number, string | `` | Number of rows textarea should have |
 | `autocomplete` | string | `off` | HTML5 autocomplete attribute, check [docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for more info and possible values |
+| `patter` | string | `` | Pattern attribute specifies a regular expression that the <input> element's value is checked against on form submission |
 
 ### value {string} - optional
 This is the initial value of the form input/textarea.
