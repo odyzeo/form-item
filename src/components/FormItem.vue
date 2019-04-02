@@ -162,7 +162,9 @@ export default {
         focus() {
             this.$emit('focus');
         },
-        blur() {
+        blur(ev) {
+            ev.target.value = this.localValue;
+
             this.validate();
             this.$emit('blur');
         },

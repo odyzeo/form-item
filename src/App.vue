@@ -29,6 +29,12 @@
                 </template>
             </form-item>
 
+            <h3>Number: {{ number.value }}</h3>
+            <form-item
+                :input="number"
+                v-model="number.value"
+            ></form-item>
+
             <a
                 v-if="isFormErrors"
                 href
@@ -74,6 +80,12 @@ export default {
             simple: {
                 label: 'Simple',
                 value: '',
+            },
+            number: {
+                label: 'Number',
+                value: '',
+                type: 'number',
+                pattern: '\\d*',
             },
             full: {
                 type: 'email',
