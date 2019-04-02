@@ -4,6 +4,8 @@
             'form-item--filled': isFilled,
             'form-item--error': isErrorClass,
             'form-item--no-label': !showLabel,
+            'form-item--required': input.required,
+            'form-item--readonly': input.readonly,
         }"
         class="form-item"
     >
