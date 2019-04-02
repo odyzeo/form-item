@@ -16,148 +16,148 @@
 @color--lighter-grey: #e6e6e6;
 
 .form-item {
-  border-radius: @input-radius;
-  font-size: 16px;
+    border-radius: @input-radius;
+    font-size: 16px;
 }
 
 .form-item__field {
-  position: relative;
-  background: @form-input-background--light;
-  border-radius: @input-radius;
-  border: @form-input-border--light;
-  transition: border .2s ease;
+    position: relative;
+    background: @form-input-background--light;
+    border-radius: @input-radius;
+    border: @form-input-border--light;
+    transition: border .2s ease;
 }
 
 .form-item__input {
-  box-sizing: border-box;
-  display: block;
-  width: 100%;
-  border: none;
-  border-radius: @input-radius - @input-border-width;
-  padding: 30px 10px 10px;
-  background: @form-input-background--light;
-  -webkit-appearance: none;
-  resize: none;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: @input-radius - @input-border-width;
+    padding: 30px 10px 10px;
+    background: @form-input-background--light;
+    -webkit-appearance: none;
+    resize: none;
 
-  textarea&,
-  input& {
-    &::placeholder {
-      color: transparent;
-      transition: color .3s;
+    textarea&,
+    input& {
+        &::placeholder {
+            color: transparent;
+            transition: color .3s;
+        }
     }
-  }
 
-  &:active,
-  &:focus {
-    outline: none;
-  }
-
-  &:focus {
-    &::placeholder {
-      color: fadeOut(@form-label-color--dark, 10%);
+    &:active,
+    &:focus {
+        outline: none;
     }
-  }
+
+    &:focus {
+        &::placeholder {
+            color: fadeOut(@form-label-color--dark, 10%);
+        }
+    }
 }
 
 .form-item__label {
-  box-sizing: border-box;
-  position: absolute;
-  top: 20px;
-  left: 10px;
-  z-index: 1;
-  color: #aaa7b4;
-  transition: all .3s;
-  pointer-events: none;
+    box-sizing: border-box;
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    z-index: 1;
+    color: #aaa7b4;
+    transition: all .3s;
+    pointer-events: none;
 }
 
 .form-item__input:focus + .form-item__label,
 .form-item--filled .form-item__label,
 .form-item--tags .form-item__label {
-  top: 10px;
-  font-size: 12px;
-  color: @form-label-color--dark;
+    top: 10px;
+    font-size: 12px;
+    color: @form-label-color--dark;
 }
 
 .form-item--filled .form-item__field {
-  border-color: @color--border;
+    border-color: @color--border;
 }
 
 /**
 * Fix autofill label
 */
 .form-item__input:-webkit-autofill + .form-item__label {
-  top: 10px;
-  font-size: 12px;
-  color: @form-label-color--dark;
+    top: 10px;
+    font-size: 12px;
+    color: @form-label-color--dark;
 }
 
 /**
 * Input label modifier
 */
 .form-item--no-label {
-  .form-item__input {
-    padding: 20px 10px;
-  }
+    .form-item__input {
+        padding: 20px 10px;
+    }
 }
 
 .form-item__field:focus-within {
-  border-color: @color--focus;
+    border-color: @color--focus;
 }
 
 .form-item__error {
-  padding: 3px 3px 0;
-  color: @color--danger;
-  font-size: @font-size--xsmall;
-  line-height: 1.1;
+    padding: 3px 3px 0;
+    color: @color--danger;
+    font-size: @font-size--xsmall;
+    line-height: 1.1;
 }
 
 /**
 * Hider used for description label
 */
 .form-item__hider {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
 
-  height: 30px;
-  background: @form-input-background--light;
-  border-radius: @input-radius @input-radius 0 0;
+    height: 30px;
+    background: @form-input-background--light;
+    border-radius: @input-radius @input-radius 0 0;
 
-  pointer-events: none;
+    pointer-events: none;
 }
 
 /**
 * Form error state
 */
 .form-item--error {
-  .form-item__field {
-    border-color: @color--danger;
-  }
+    .form-item__field {
+        border-color: @color--danger;
+    }
 }
 
 .form-item--group {
-  .form-item__field {
-    display: flex;
-    overflow: hidden;
-  }
+    .form-item__field {
+        display: flex;
+        overflow: hidden;
+    }
 }
 
 .form-item__readonly {
-  background: @form-input-color--light;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background: @form-input-color--light;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  padding: 0 15px;
+    padding: 0 15px;
 
-  background: @color--lighter-grey;
+    background: @color--lighter-grey;
 
-  line-height: 1;
+    line-height: 1;
 }
 
 .form-item__wrapper {
-  position: relative;
-  flex: 1 1 auto;
+    position: relative;
+    flex: 1 1 auto;
 }
