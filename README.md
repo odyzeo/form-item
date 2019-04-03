@@ -111,10 +111,11 @@ export default {
 | `readonly` | boolean | `false` | If field is read only |
 | `placeholder` | string | `` | Native placeholder attribute for input/textarea |
 | `accept` | string |  | Which file types should be accepted if type is file |
-| `validators` | array | `[]` | Which validators should be used to validate input value |
+| `validators` | array | `undefined` | Array holding objects with `validator`{`string`} and `message`{`string`} properties |
+| `validatorEvent` | string | `none` | Pick validator events which will be used for frontend validation. Choose from: <ul><li>`onBlurThenOnInput`: validate field on blur first, then on input periodically</li> <li>`onBlur`</li> <li>`onInput`</li></ul>|
 | `rows` | number, string | `` | Number of rows textarea should have |
 | `autocomplete` | string | `off` | HTML5 autocomplete attribute, check [docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for more info and possible values |
-| `patter` | string | `` | Pattern attribute specifies a regular expression that the <input> element's value is checked against on form submission |
+| `pattern` | string | `` | Pattern attribute specifies a regular expression that the <input> element's value is checked against on form submission |
 
 ### value {string} - optional
 This is the initial value of the form input/textarea.
@@ -132,6 +133,7 @@ Error message for required field
 - `min` : length of string
 - `confirmed `: confirmed passwords
 - `regex` : your custom regex
+- `required` : for custom required message
 
 ### bindToInput {Object} - optional
 Used for generating custom attributes to input/textarea element.
@@ -160,8 +162,6 @@ yarn serve
 
 # TODO
 - validate on custom events, e.g. form submit not just on blur
-- translate default texts in validators to english
-- allow custom validator texts with props
 - integrate some mask (v-mask or vue-inputmask or custom) for zip and phone
 - add total maxLength to textarea
 - add maxLength per line to textarea

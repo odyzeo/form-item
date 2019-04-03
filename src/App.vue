@@ -9,10 +9,12 @@
             <form-item
                 :input="simple"
                 v-model="simple.value"
+                :ref="simple.name"
             ></form-item>
 
             <h3>Full example: {{ full.value }}</h3>
             <form-item
+                :ref="full.name"
                 :bind-to-input="{ 'data-hj-whitelist': true }"
                 :form-errors="formErrors.full"
                 :input="full"
@@ -33,6 +35,7 @@
             <form-item
                 :input="number"
                 v-model="number.value"
+                :ref="number.name"
             ></form-item>
 
             <a
@@ -54,12 +57,14 @@
             <form-item
                 :input="zip"
                 v-model="zip.value"
+                :ref="zip.name"
             ></form-item>
 
             <h3>Textarea: {{ textarea.value }}</h3>
             <form-item
                 :input="textarea"
                 v-model="textarea.value"
+                :ref="textarea.name"
             ></form-item>
         </div>
     </div>
@@ -80,12 +85,21 @@ export default {
             simple: {
                 label: 'Simple',
                 value: '',
+                name: 'simple',
             },
             number: {
                 label: 'Number',
                 value: '',
                 type: 'number',
                 pattern: '\\d*',
+                name: 'number',
+                required: true,
+                validators: [
+                    {
+                        validator: 'min:5',
+                    },
+                ],
+                validatorEvent: 'onBlurThenOnInput',
             },
             full: {
                 type: 'email',
@@ -94,19 +108,32 @@ export default {
                 readonly: false,
                 placeholder: 'example@odyzeo.com',
                 accept: '', // Just for input type 'file'
-                validators: ['email'],
                 rows: 0, // Just for input type 'textarea'
                 autocomplete: 'username email',
                 label: 'E-mail',
                 pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$',
                 value: '',
+                validators: [
+                    {
+                        validator: 'email',
+                    },
+                    {
+                        validator: 'required',
+                    },
+                ],
+                validatorEvent: 'onBlur',
             },
             zip: {
                 name: 'zip',
                 placeholder: 'placeholder',
                 label: 'ZIP',
                 required: true,
-                validators: ['zip'],
+                validators: [
+                    {
+                        validator: 'zip',
+                    },
+                ],
+                validatorEvent: 'onInput',
                 value: '',
             },
             textarea: {
@@ -126,12 +153,19 @@ export default {
     },
     methods: {
         submit() {
+            this.validateAll();
+
             this.formErrors = {
                 full: ['Some BE error'],
             };
         },
         clear() {
             this.formErrors = {};
+        },
+        validateAll() {
+            Object.keys(this.$refs).forEach((key) => {
+                this.$refs[key].validate();
+            });
         },
     },
 };
