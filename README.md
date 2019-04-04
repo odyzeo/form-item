@@ -117,6 +117,9 @@ export default {
 | `autocomplete` | string | `off` | HTML5 autocomplete attribute, check [docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for more info and possible values |
 | `pattern` | string | `` | Pattern attribute specifies a regular expression that the <input> element's value is checked against on form submission |
 
+### groupName {string = ''} - optional 
+Set if you need to target one or more form item components with global methods
+
 ### value {string} - optional
 This is the initial value of the form input/textarea.
 
@@ -140,6 +143,37 @@ Used for generating custom attributes to input/textarea element.
 
 ### inputClass {string} - optional
 Used for adding custom class to input/textarea element.
+
+## Global methods
+Methods called on `$formItem` object installed on main Vue instance
+
+### $formItem.validate( name )
+- Arguments:
+    - `{string} name` Group name of one or multiple form items
+    
+- Usage: 
+
+    Trigger validation of all form items corresponding to group name argument
+   
+### $formItem.clear( name )
+- Arguments:
+    - `{string} name` Group name of one or multiple form items
+   
+- Usage: 
+
+    Clear inputs and errors on all form items corresponding to group name argument
+
+### $formItem.getErrors( name )
+- Arguments:
+    - `{string} name` Group name of one or multiple form items
+   
+- Returns: 
+    - Array of errors
+   
+- Usage: 
+
+    Get all current FE errors of all form items corresponding to group name argument 
+
 
 ## Events
 Component emits these events:

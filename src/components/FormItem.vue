@@ -97,6 +97,10 @@ import VALIDATORS from '@/constants/validators';
 
 export default {
     props: {
+        groupName: {
+            type: String,
+            default: '',
+        },
         input: {
             type: Object,
             required: true,
@@ -185,6 +189,12 @@ export default {
             this.hadErrorState = true;
         },
     },
+    created() {
+        this.$formItem.event.$emit('form-item-activated', this);
+    },
+    beforeDestroy() {
+        this.$formItem.event.$emit('form-item-destroyed', this);
+    },
     methods: {
         focus() {
             this.$emit('focus');
@@ -271,6 +281,13 @@ export default {
         },
         keydown(event) {
             this.$emit('keydown', event);
+        },
+        clear() {
+            this.localValue = '';
+            this.$emit('input', this.localValue);
+            this.errors = [];
+            this.showFormErrors = false;
+            this.hadErrorState = false;
         },
     },
 };
