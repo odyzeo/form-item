@@ -53,7 +53,7 @@
 </template>
 
 <script>
-const myFunc = param => value => value.includes(`${param}joseph`);
+const myFunc = param => value => value.indexOf(`${param}joseph`) !== -1;
 
 export default {
     data() {

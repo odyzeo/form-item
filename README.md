@@ -146,7 +146,7 @@ You can also make use of a custom message property as per predefined validators.
 
 ```vue
 validators: {
-    validator: value => value.includes(`joseph`),
+    validator: value => value.indexOf(`joseph`) !== -1,
     message: 'My custom error message',
 }
 ``` 
@@ -156,7 +156,7 @@ If your validator needs to provide parameters, you can simply create a higher or
 function that returns the actual validator, like in between builtin validator.  
 
 ```vue
-const myFunc = param => value => value.includes(`${param} joseph`);
+const myFunc = param => value => value.indexOf(`${param} joseph`) !== -1;
 
 // ...
 
