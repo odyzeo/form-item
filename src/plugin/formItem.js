@@ -26,7 +26,7 @@ const Plugin = {
 
         function iterateOverItems(name, callbackString) {
             Plugin.activeItems
-                .filter(item => item.name !== '' && item.name === name)
+                .filter(item => item.groupName !== '' && item.groupName === name)
                 .forEach((item) => {
                     item[callbackString]();
             });
@@ -36,7 +36,7 @@ const Plugin = {
             const errors = [];
 
             Plugin.activeItems
-                .filter(item => item.name !== '' && item.name === name)
+                .filter(item => item.groupName !== '' && item.groupName === name)
                 .forEach((item) => {
                     if (item.errors.length > 0) {
                         errors.push(...item.errors);

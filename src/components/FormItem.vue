@@ -80,7 +80,6 @@
                 v-html="error"
             ></div>
         </template>
-
         <div v-else>
             <div
                 v-for="(error, key) in formErrors"
@@ -113,10 +112,6 @@ export default {
             type: String,
             default: '',
         },
-        msgRequired: {
-            type: String,
-            default: 'Toto pole je povinné',
-        },
         bindToInput: {
             type: Object,
             default: () => {
@@ -140,6 +135,7 @@ export default {
             isTextArea: type === 'textarea',
             showFormErrors: (this.formErrors.length > 0),
             hadErrorState: false,
+            inputValidators: null,
         };
     },
     computed: {
@@ -163,8 +159,8 @@ export default {
             return type => type.split(':')[0];
         },
         validator() {
-            return type => this.input.validators
-                && this.input.validators
+            return type => this.inputValidators
+                && this.inputValidators
                     .find(validator => this.getType(validator.validator) === type);
         },
         validatorEvent() {
@@ -192,6 +188,9 @@ export default {
     created() {
         this.$formItem.event.$emit('form-item-activated', this);
     },
+    mounted() {
+        this.inputValidators = this.input.validators || null;
+    },
     beforeDestroy() {
         this.$formItem.event.$emit('form-item-destroyed', this);
     },
@@ -210,17 +209,14 @@ export default {
 
             if (
                 this.input.required
-                && (
-                this.localValue === null || this.localValue === ''
-                )
+                && (this.localValue === null || this.localValue === '')
             ) {
                 this.errors.push((this.validator('required')
-                    && this.requiredMessage)
-                    || this.msgRequired);
+                    && this.requiredMessage));
             } else if (
                 this.localValue !== null
                 && this.localValue !== ''
-                && this.input.validators
+                && this.inputValidators
             ) {
                 this.validateTypes();
             }
@@ -237,7 +233,18 @@ export default {
             }
         },
         validateTypes() {
-            this.input.validators.forEach((rawValidator) => {
+            this.inputValidators.forEach((rawValidator) => {
+                if (typeof rawValidator.validator === 'function') {
+                    const { validator } = rawValidator;
+                    const { message = 'Custom error message' } = rawValidator;
+
+                    if (!validator(this.localValue)) {
+                        this.errors.push(message);
+                    }
+
+                    return;
+                }
+
                 const [command, rawAttrs] = rawValidator.validator.split(':');
                 const attrs = rawAttrs ? rawAttrs.split(',') : [];
                 const validator = VALIDATORS[command];

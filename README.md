@@ -111,7 +111,7 @@ export default {
 | `readonly` | boolean | `false` | If field is read only |
 | `placeholder` | string | `` | Native placeholder attribute for input/textarea |
 | `accept` | string |  | Which file types should be accepted if type is file |
-| `validators` | array | `undefined` | Array holding objects with `validator`{`string`} and `message`{`string`} properties |
+| `validators` | array | `null` | Array holding objects with `validator` {`string` | `function`} and `message`{`string`} properties |
 | `validatorEvent` | string | `none` | Pick validator events which will be used for frontend validation. Choose from: <ul><li>`onBlurThenOnInput`: validate field on blur first, then on input periodically</li> <li>`onBlur`</li> <li>`onInput`</li></ul>|
 | `rows` | number, string | `` | Number of rows textarea should have |
 | `autocomplete` | string | `off` | HTML5 autocomplete attribute, check [docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for more info and possible values |
@@ -137,6 +137,36 @@ Error message for required field
 - `confirmed `: confirmed passwords
 - `regex` : your custom regex
 - `required` : for custom required message
+
+## Custom validator
+It is possible to use your own validator instead of predefined one.
+
+The custom validator has to be a valid return function with value parameter.
+You can also make use of a custom message property as per predefined validators.
+
+```vue
+validators: {
+    validator: value => value.includes(`joseph`),
+    message: 'My custom error message',
+}
+``` 
+
+### Custom validator with parameters
+If your validator needs to provide parameters, you can simply create a higher order 
+function that returns the actual validator, like in between builtin validator.  
+
+```vue
+const myFunc = param => value => value.includes(`${param} joseph`);
+
+// ...
+
+validators: {
+    validator: myFunc('some text'),
+    message: 'My custom error message',
+}
+
+```
+
 
 ### bindToInput {Object} - optional
 Used for generating custom attributes to input/textarea element.

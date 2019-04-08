@@ -53,6 +53,8 @@
 </template>
 
 <script>
+const myFunc = param => value => value.includes(`${param}joseph`);
+
 export default {
     data() {
         return {
@@ -95,6 +97,10 @@ export default {
                     },
                     {
                         validator: 'required',
+                    },
+                    {
+                        validator: myFunc('x'),
+                        message: 'There was a custom validated error',
                     },
                 ],
                 validatorEvent: 'onBlur',
