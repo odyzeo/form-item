@@ -12,11 +12,11 @@ const Plugin = {
         /**
          * Functions
          */
-        function getActiveItems(item) {
+        function subscribeFormItem(item) {
             Plugin.activeItems.push(item);
         }
 
-        function removeInactiveItems(item) {
+        function unsubscribeFormItem(item) {
             const index = Plugin.activeItems.indexOf(item);
 
             if (index !== -1) {
@@ -24,11 +24,11 @@ const Plugin = {
             }
         }
 
-        function iterateOverItems(name, callbackString) {
+        function callFunctionOnFormItem(name, functionName) {
             Plugin.activeItems
                 .filter(item => item.groupName !== '' && item.groupName === name)
                 .forEach((item) => {
-                    item[callbackString]();
+                    item[functionName]();
             });
         }
 
@@ -56,8 +56,8 @@ const Plugin = {
         this.componentName = options.componentName || defaultComponentName;
         this.activeItems = [];
 
-        this.event.$on('form-item-activated', getActiveItems);
-        this.event.$on('form-item-destroyed', removeInactiveItems);
+        this.event.$on('subscribe', subscribeFormItem);
+        this.event.$on('unsubscribe', unsubscribeFormItem);
 
         /**
          * Plugin API
@@ -66,10 +66,10 @@ const Plugin = {
         Vue.prototype.$formItem = {
             // methods
             validate(name) {
-                iterateOverItems(name, 'validate');
+                callFunctionOnFormItem(name, 'validate');
             },
             clear(name) {
-                iterateOverItems(name, 'clear');
+                callFunctionOnFormItem(name, 'clear');
             },
             getErrors(name) {
                 return getErrors(name);

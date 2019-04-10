@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import FormItem from './plugin/formItem';
+import FormItem from './plugin/FormItem';
 import App from './App';
 import Inputs from './components/Inputs';
 

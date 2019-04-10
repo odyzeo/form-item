@@ -186,13 +186,13 @@ export default {
         },
     },
     created() {
-        this.$formItem.event.$emit('form-item-activated', this);
+        this.$formItem.event.$emit('subscribe', this);
     },
     mounted() {
         this.inputValidators = this.input.validators || null;
     },
     beforeDestroy() {
-        this.$formItem.event.$emit('form-item-destroyed', this);
+        this.$formItem.event.$emit('unsubscribe', this);
     },
     methods: {
         focus() {
