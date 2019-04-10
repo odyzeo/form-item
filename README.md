@@ -16,15 +16,14 @@ npm install --save @odyzeo/form-item
 yarn add @odyzeo/form-item
 ```
 
-Import component in your where you want to use it and register it:
+Import and initiate component with possibility to change its default name with options:
+
+`componentName {string = 'form-item'}` - optional
 
 ```
 import FormItem from '@odyzeo/form-item';
-export default {
-  components: {
-    FormItem,
-  },
-}
+
+Vue.use(FormItem, {options})
 ```
 
 Import styles or make your own.
@@ -35,7 +34,7 @@ import '@odyzeo/form-item/dist/form-item.css';
 
 ## Usage
 
-```
+```vue
 <template>
   <div>
       <form-item
@@ -45,12 +44,12 @@ import '@odyzeo/form-item/dist/form-item.css';
       
       <form-item
         :input="full"
-        v-model="full.value"
-        :msg-required="requiredMessage"
+        v-model="full.value"      
         :form-errors="formErrors.full"
         class="form-item--group"
         :bind-to-input="{ 'data-hj-whitelist': true }"
         input-class="custom-class-for-input"
+        group-name="form-item-form-test"
       >
         <template slot="prepend">
           <div class="form-item__readonly">Your</div>
@@ -63,7 +62,7 @@ import '@odyzeo/form-item/dist/form-item.css';
 </template>
 ```
 
-```
+```vue
 <script>
 import FormItem from '@odyzeo/form-item'
 
@@ -85,7 +84,15 @@ export default {
         readonly: false,
         placeholder: 'example@odyzeo.com',
         accept: '', // Just for input type 'file'
-        validators: ['email'],
+        validators: [
+            {
+                validator: 'email',               
+            },
+            {
+                validator: 'required',
+                message: 'Povinné',
+            },
+        ],
         rows: 0, // Just for input type 'textarea'
         autocomplete: 'username email',
         label: 'E-mail',
@@ -225,7 +232,6 @@ yarn serve
 ```
 
 # TODO
-- validate on custom events, e.g. form submit not just on blur
 - integrate some mask (v-mask or vue-inputmask or custom) for zip and phone
 - add total maxLength to textarea
 - add maxLength per line to textarea

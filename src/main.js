@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import formItem from './plugin/formItem';
+import FormItem from './plugin/formItem';
 import App from './App';
 import Inputs from './components/Inputs';
 
@@ -7,7 +7,7 @@ Vue.component('inputs', Inputs);
 
 Vue.config.productionTip = false;
 
-Vue.use(formItem);
+Vue.use(FormItem);
 
 new Vue({
     render: h => h(App),
