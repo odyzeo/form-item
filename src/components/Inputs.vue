@@ -11,9 +11,8 @@
         <form-item
             :ref="full.name"
             :bind-to-input="{ 'data-hj-whitelist': true }"
-            :form-errors="formErrors.full"
+            :form-errors="beErrors.full"
             :input="full"
-            :msg-required="requiredMessage"
             v-model="full.value"
             class="form-item--group"
             input-class="custom-class-for-input"
@@ -58,6 +57,9 @@ const myFunc = param => value => value.indexOf(`${param}joseph`) !== -1;
 export default {
     data() {
         return {
+            beErrors: {
+                full: ['BE required'],
+            },
             requiredMessage: 'Povinné',
             formErrors: {},
             simple: {

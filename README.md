@@ -131,10 +131,7 @@ Set if you need to target one or more form item components with global methods
 This is the initial value of the form input/textarea.
 
 ### formErrors {array} - optional
-Array of errors to display.
-
-### msgRequired {string} - optional
-Error message for required field
+Array of errors to display. Will take priority before FE validator errors until value is changed.
 
 ## Available validators
 - `email`

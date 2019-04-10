@@ -72,18 +72,18 @@
 
         <slot name="result"></slot>
 
-        <template v-if="!showFormErrors">
+        <template v-if="showFormErrors">
             <div
-                v-for="(error, key) in errors"
-                :key="`fe_error_${key}`"
+                v-for="(error, key) in formErrors"
+                :key="`be_error_${key}`"
                 class="form-item__error"
                 v-html="error"
             ></div>
         </template>
         <div v-else>
             <div
-                v-for="(error, key) in formErrors"
-                :key="`be_error_${key}`"
+                v-for="(error, key) in errors"
+                :key="`fe_error_${key}`"
                 class="form-item__error"
                 v-html="error"
             ></div>
@@ -211,8 +211,7 @@ export default {
                 this.input.required
                 && (this.localValue === null || this.localValue === '')
             ) {
-                this.errors.push((this.validator('required')
-                    && this.requiredMessage));
+                this.errors.push(this.requiredMessage);
             } else if (
                 this.localValue !== null
                 && this.localValue !== ''
