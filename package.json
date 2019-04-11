@@ -1,6 +1,6 @@
 {
     "name": "@odyzeo/form-item",
-    "version": "1.3.0",
+    "version": "2.0.0",
     "description": "Odyzeo form item component with Vue",
     "main": "dist/form-item.umd.js",
     "keywords": [
@@ -10,7 +10,7 @@
         "textarea",
         "vue"
     ],
-    "author": "Odyzeo <tomas.zamba@odyzeo.com, peter.baricic@odyzeo.com> (https://odyzeo.com)",
+    "author": "Odyzeo <tomas.zamba@odyzeo.com, peter.baricic@odyzeo.com, svetozar.sadecky@odyzeo.com> (https://odyzeo.com)",
     "publishConfig": {
         "access": "public"
     },
@@ -18,7 +18,7 @@
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "build-lib": "vue-cli-service build --target lib --name form-item ./src/components/FormItem.vue",
+        "build-lib": "vue-cli-service build --target lib --name form-item ./src/plugin/FormItem.js",
         "lint": "vue-cli-service lint"
     },
     "repository": {

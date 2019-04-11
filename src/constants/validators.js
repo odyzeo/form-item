@@ -40,4 +40,7 @@ export default {
         },
         message: 'Nesprávny tvar. Hodnotu zadajte v\xa0tvare "$1".',
     },
+    required: {
+        message: 'Toto pole je povinné',
+    },
 };
