@@ -5,7 +5,9 @@
         <div class="container">
             <h1 class="text-center">Form item</h1>
 
-            <inputs></inputs>
+            <inputs
+                :be-errors="beErrors"
+            ></inputs>
 
             <a
                 href
@@ -20,6 +22,13 @@
             >
                 Clear errors
             </a>
+            <br>
+            <a
+                href
+                @click.prevent="setBeErrors"
+            >
+                Set BE errors
+            </a>
         </div>
     </div>
 </template>
@@ -27,7 +36,11 @@
 <script>
 export default {
     name: 'App',
-
+    data() {
+        return {
+            beErrors: {},
+        };
+    },
     methods: {
         submit() {
             this.validateAll();
@@ -42,6 +55,11 @@ export default {
         },
         clearErrors() {
             this.$formItem.clear('form-item-form-1');
+        },
+        setBeErrors() {
+            this.beErrors = {
+                full: ['BE required'],
+            };
         },
     },
 };

@@ -52,14 +52,17 @@
 </template>
 
 <script>
-const myFunc = param => value => value.indexOf(`${param}joseph`) !== -1;
+const myFunc = param => value => value.indexOf(`${param}doe`) !== -1;
 
 export default {
+    props: {
+        beErrors: {
+            type: Object,
+            default: () => ({}),
+        },
+    },
     data() {
         return {
-            beErrors: {
-                full: ['BE required'],
-            },
             requiredMessage: 'Povinné',
             formErrors: {},
             simple: {
@@ -101,8 +104,8 @@ export default {
                         validator: 'required',
                     },
                     {
-                        validator: myFunc('x'),
-                        message: 'There was a custom validated error',
+                        validator: myFunc('john.'),
+                        message: 'Your email should start with john.doe',
                     },
                 ],
                 validatorEvent: 'onBlur',
