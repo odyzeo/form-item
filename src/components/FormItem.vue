@@ -4,8 +4,9 @@
             'form-item--filled': isFilled,
             'form-item--error': isErrorClass,
             'form-item--no-label': !showLabel,
-            'form-item--required': input.required,
-            'form-item--readonly': input.readonly,
+            'form-item--required': isRequired,
+            'form-item--readonly': isReadonly,
+            'form-item--hidden': isHidden,
         }"
         class="form-item"
     >
@@ -26,8 +27,8 @@
                     :id="uid"
                     :name="input.name"
                     :placeholder="input.placeholder"
-                    :readonly="input.readonly"
-                    :required="input.required"
+                    :readonly="isReadonly"
+                    :required="isRequired"
                     :rows="input.rows"
                     v-bind="bindToInput"
                     v-model="localValue"
@@ -48,8 +49,8 @@
                     :name="input.name"
                     :pattern="input.pattern"
                     :placeholder="input.placeholder"
-                    :readonly="input.readonly"
-                    :required="input.required"
+                    :readonly="isReadonly"
+                    :required="isRequired"
                     :type="type"
                     v-bind="bindToInput"
                     v-model="localValue"
@@ -111,7 +112,7 @@ export default {
             default: () => ([]),
         },
         value: {
-            type: String,
+            type: [Number, String],
             default: '',
         },
         bindToInput: {
@@ -151,8 +152,17 @@ export default {
         isErrorClass() {
             return this.errors.length || (this.formErrors.length && this.showFormErrors);
         },
+        isHidden() {
+            return this.type === 'hidden';
+        },
+        isReadonly() {
+            return this.input.readonly;
+        },
+        isRequired() {
+            return this.input.required;
+        },
         showLabel() {
-            return this.input.label && this.input.type !== 'file';
+            return this.input.label && this.type !== 'file';
         },
         showHider() {
             return this.isTextArea && this.input.label;
@@ -181,6 +191,8 @@ export default {
              * @type {boolean}
              */
             this.showFormErrors = false;
+
+            this.validateByEventType('input');
         },
         formErrors() {
             this.showFormErrors = true;
@@ -203,7 +215,7 @@ export default {
         blur(ev) {
             ev.target.value = this.localValue;
 
-            this.setValidationType(ev);
+            this.validateByEventType(ev.type);
             this.$emit('blur');
         },
         validate(scroll = false) {
@@ -261,29 +273,29 @@ export default {
                     }
             });
         },
-        setValidationType(ev) {
+        validateByEventType(type) {
             if (this.validatorEvent === 'onBlurThenOnInput') {
-                if (this.hadErrorState && ev.type === 'input') {
+                if (this.hadErrorState && type === 'input') {
                     this.validate();
-                } else if (ev.type === 'blur') {
+                } else if (type === 'blur') {
                     this.validate();
                 }
             }
 
             if (this.validatorEvent === 'onBlur') {
-                if (ev.type === 'blur') {
+                if (type === 'blur') {
                     this.validate();
                 }
             }
 
             if (this.validatorEvent === 'onInput') {
-                if (ev.type === 'input') {
+                if (type === 'input') {
                     this.validate();
                 }
             }
         },
         change(ev) {
-            this.setValidationType(ev);
+            this.validateByEventType(ev.type);
 
             this.$emit('input', this.localValue);
         },

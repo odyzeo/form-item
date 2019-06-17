@@ -48,6 +48,25 @@
             v-model="textarea.value"
             :ref="textarea.name"
         ></form-item>
+
+        <h3>Hidden: {{ hidden.value }}</h3>
+        <p>
+            Start:
+            <form-item
+                :input="hidden"
+                v-model="hidden.value"
+                :ref="hidden.name"
+                group-name="form-item-form-1"
+            ></form-item>
+            end;
+        </p>
+        <p>
+            Set hidden value:<br>
+            <input
+                v-model="hidden.value"
+                type="text"
+            >
+        </p>
     </div>
 </template>
 
@@ -130,6 +149,18 @@ export default {
                 placeholder: 'Textarea placeholder',
                 rows: 10,
                 value: 'Some text just for textarea',
+            },
+            hidden: {
+                value: '',
+                name: 'hidden',
+                type: 'hidden',
+                required: true,
+                validators: [
+                    {
+                        validator: 'required',
+                    },
+                ],
+                validatorEvent: 'onBlurThenOnInput',
             },
         };
     },
