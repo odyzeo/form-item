@@ -46,6 +46,7 @@
                     :autocomplete="autocomplete"
                     :class="inputClass"
                     :id="uid"
+                    :multiple="input.multiple"
                     :name="input.name"
                     :pattern="input.pattern"
                     :placeholder="input.placeholder"
