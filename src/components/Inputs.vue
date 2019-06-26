@@ -47,6 +47,7 @@
             :input="textarea"
             v-model="textarea.value"
             :ref="textarea.name"
+            :trans="customTranslate"
         ></form-item>
 
         <h3>Hidden: {{ hidden.value }}</h3>
@@ -99,6 +100,7 @@ export default {
                 validators: [
                     {
                         validator: 'min:5',
+                        message: 'Iba $0 znakov',
                     },
                 ],
                 validatorEvent: 'onBlurThenOnInput',
@@ -163,6 +165,11 @@ export default {
                 validatorEvent: 'onBlurThenOnInput',
             },
         };
+    },
+    methods: {
+        customTranslate(key) {
+            return key.toUpperCase();
+        },
     },
 };
 </script>

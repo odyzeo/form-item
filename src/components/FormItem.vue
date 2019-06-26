@@ -26,7 +26,7 @@
                     :class="inputClass"
                     :id="uid"
                     :name="input.name"
-                    :placeholder="input.placeholder"
+                    :placeholder="translate(input.placeholder)"
                     :readonly="isReadonly"
                     :required="isRequired"
                     :rows="input.rows"
@@ -49,7 +49,7 @@
                     :multiple="input.multiple"
                     :name="input.name"
                     :pattern="input.pattern"
-                    :placeholder="input.placeholder"
+                    :placeholder="translate(input.placeholder)"
                     :readonly="isReadonly"
                     :required="isRequired"
                     :type="type"
@@ -67,7 +67,7 @@
                     :for="uid"
                     class="form-item__label"
                 >
-                    {{ input.label }}
+                    {{ translate(input.label) }}
                 </label>
             </div>
 
@@ -81,7 +81,7 @@
                 v-for="(error, key) in formErrors"
                 :key="`be_error_${key}`"
                 class="form-item__error"
-                v-html="error"
+                v-html="translate(error)"
             ></div>
         </template>
         <div v-else>
@@ -124,6 +124,10 @@ export default {
         inputClass: {
             type: String,
             default: '',
+        },
+        trans: {
+            type: Function,
+            default: null,
         },
     },
     data() {
@@ -226,7 +230,7 @@ export default {
                 this.input.required
                 && (this.localValue === null || this.localValue === '')
             ) {
-                this.errors.push(this.requiredMessage);
+                this.errors.push(this.translate(this.requiredMessage));
             } else if (
                 this.localValue !== null
                 && this.localValue !== ''
@@ -263,15 +267,15 @@ export default {
                 const attrs = rawAttrs ? rawAttrs.split(',') : [];
                 const validator = VALIDATORS[command];
 
-                if (validator.test
-                    && !validator.test(this.localValue, attrs, this.$refs.input)) {
-                        this.errors
-                            .push(
-                                this.validator(command).message
-                                    || validator.message
-                                        .replace(/\$(\d+)/g, (match, number) => attrs[+number]),
-                        );
-                    }
+                const isError = validator.test
+                    && !validator.test(this.localValue, attrs, this.$refs.input);
+                if (isError) {
+                    const message = this.validator(command).message || validator.message;
+                    const translatedMessage = this.translate(message);
+                    const replaceNumbers = translatedMessage
+                        .replace(/\$(\d+)/g, (match, number) => attrs[+number]);
+                    this.errors.push(replaceNumbers);
+                }
             });
         },
         validateByEventType(type) {
@@ -310,10 +314,17 @@ export default {
             this.showFormErrors = false;
             this.hadErrorState = false;
         },
+        translate(key) {
+            if (typeof this.trans === 'function') {
+                return this.trans(key);
+            }
+
+            return this.$formItem.trans(key);
+        },
     },
 };
 </script>
 
 <style lang="less">
-    @import '../less/form-item.less';
+@import '../less/form-item.less';
 </style>

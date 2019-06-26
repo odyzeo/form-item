@@ -21,6 +21,12 @@ export default {
         },
         message: 'Nesprávny tvar. Hodnotu zadajte v\xa0tvare "841\xa001".',
     },
+    max: {
+        test(value, attrs) {
+            return value.length <= attrs[0];
+        },
+        message: 'Maximálny počet znakov je $0.',
+    },
     min: {
         test(value, attrs) {
             return value.length >= attrs[0];

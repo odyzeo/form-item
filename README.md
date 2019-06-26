@@ -48,6 +48,7 @@ import '@odyzeo/form-item/dist/form-item.css';
         :form-errors="formErrors.full"
         class="form-item--group"
         :bind-to-input="{ 'data-hj-whitelist': true }"
+        :trans="toUpperCase"
         input-class="custom-class-for-input"
         group-name="form-item-form-test"
       >
@@ -67,44 +68,54 @@ import '@odyzeo/form-item/dist/form-item.css';
 import FormItem from '@odyzeo/form-item'
 
 export default {
-  name: 'App',
-  components: {
-    FormItem,
-  },
-  data() {
-    return {
-      simple: {
-        label: 'Simple',
-        value: '',
-      },
-      full: {
-        type: 'email',
-        name: 'email',
-        required: true,
-        readonly: false,
-        placeholder: 'example@odyzeo.com',
-        accept: '', // Just for input type 'file'
-        validators: [
-            {
-                validator: 'email',               
+    name: 'App',
+    components: {
+        FormItem,
+    },
+    data() {
+        return {
+            simple: {
+                label: 'Simple',
+                value: '',
             },
-            {
-                validator: 'required',
-                message: 'Povinné',
+            full: {
+                type: 'email',
+                name: 'email',
+                required: true,
+                readonly: false,
+                placeholder: 'example@odyzeo.com',
+                accept: '', // Just for input type 'file'
+                validators: [
+                    {
+                        validator: 'email',
+                    },
+                    {
+                        validator: 'required',
+                        message: 'Povinné',
+                    },
+                ],
+                rows: 0, // Just for input type 'textarea'
+                autocomplete: 'username email',
+                label: 'E-mail',
+                value: '',
             },
-        ],
-        rows: 0, // Just for input type 'textarea'
-        autocomplete: 'username email',
-        label: 'E-mail',
-        value: '',
-      },
-      requiredMessage: 'Povinné',
-      formErrors: {},
-    };
-  },
+            requiredMessage: 'Povinné',
+            formErrors: {},
+        };
+    },
+    methods: {
+        toUpperCase(key) {
+            return key.toUpperCase();
+        },
+    },
 };
 </script>
 ```
+
+## Plugin options
+| Property name | Type     | Default value | Description                                              |
+| ------------- | -------- | ------------- | -------------------------------------------------------- |
+| `trans`       | function | `null`        | Enable translating or modifying labels and placeholders. |
 
 ## Props
 
@@ -118,7 +129,7 @@ export default {
 | `readonly` | boolean | `false` | If field is read only |
 | `placeholder` | string | `` | Native placeholder attribute for input/textarea |
 | `accept` | string |  | Which file types should be accepted if type is file |
-| `validators` | array | `null` | Array holding objects with `validator` {`string` | `function`} and `message`{`string`} properties |
+| `validators` | array | `null` | Array holding objects with `validator {string} - name of validator` and `message {string} - error message text` properties |
 | `validatorEvent` | string | `none` | Pick validator events which will be used for frontend validation. Choose from: <ul><li>`onBlurThenOnInput`: validate field on blur first, then on input periodically</li> <li>`onBlur`</li> <li>`onInput`</li></ul>|
 | `rows` | number, string | `` | Number of rows textarea should have |
 | `autocomplete` | string | `off` | HTML5 autocomplete attribute, check [docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for more info and possible values |
@@ -128,7 +139,10 @@ export default {
 Set if you need to target one or more form item components with global methods
 
 ### value {string} - optional
-This is the initial value of the form input/textarea.
+This is the initial value of the form input/textarea. Use `v-model` for reactivity.
+
+### trans {Function} - optional 
+Custom function to translate or modify input placeholder and label.
 
 ### formErrors {array} - optional
 Array of errors to display. Will take priority before FE validator errors until value is changed.
@@ -137,7 +151,8 @@ Array of errors to display. Will take priority before FE validator errors until 
 - `email`
 - `zip`
 - `tel` : phone number
-- `min` : length of string
+- `max` : length of string - Use `$0` in validator `message` to replace number.
+- `min` : length of string - Use `$0` in validator `message` to replace number.
 - `confirmed `: confirmed passwords
 - `regex` : your custom regex
 - `required` : for custom required message
@@ -170,7 +185,6 @@ validators: {
 }
 
 ```
-
 
 ### bindToInput {Object} - optional
 Used for generating custom attributes to input/textarea element.

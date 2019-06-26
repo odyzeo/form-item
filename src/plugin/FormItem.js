@@ -50,10 +50,15 @@ const Plugin = {
          * Main logic
          */
         const defaultComponentName = 'form-item';
+        const defaultTrans = key => key;
+        const {
+            componentName = defaultComponentName,
+            trans = defaultTrans,
+        } = options;
 
         this.installed = true;
         this.event = new Vue();
-        this.componentName = options.componentName || defaultComponentName;
+        this.componentName = componentName;
         this.activeItems = [];
 
         this.event.$on('subscribe', subscribeFormItem);
@@ -77,6 +82,9 @@ const Plugin = {
 
             // properties
             event: this.event,
+
+            // methods
+            trans,
         };
 
         /**
