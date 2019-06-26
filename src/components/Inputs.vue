@@ -1,10 +1,24 @@
 <template>
     <div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h1 class="text-center">Form item</h1>
+
+        <div @click.prevent="$i18n.locale = 'en'">EN</div>
+        <div @click.prevent="$i18n.locale = 'sk'">SK</div>
+
         <h3>Simple: {{ simple.value }}</h3>
         <form-item
             :input="simple"
             v-model="simple.value"
             :ref="simple.name"
+            :trans="$t"
         ></form-item>
 
         <h3>Full example: {{ full.value }}</h3>
@@ -86,7 +100,7 @@ export default {
             requiredMessage: 'Povinné',
             formErrors: {},
             simple: {
-                label: 'Simple',
+                label: 'formItemSimple',
                 value: '',
                 name: 'simple',
             },

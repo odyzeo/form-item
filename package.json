@@ -34,7 +34,8 @@
     ],
     "dependencies": {
         "normalize.css": "^8.0.1",
-        "vue": "^2.6.10"
+        "vue": "^2.6.10",
+        "vue-i18n": "^8.11.2"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "^3.8.0",
