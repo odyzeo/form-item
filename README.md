@@ -117,6 +117,26 @@ export default {
 | ------------- | -------- | ------------- | -------------------------------------------------------- |
 | `trans`       | function | `null`        | Enable translating or modifying labels and placeholders. |
 
+### Example using vui-i18n
+```javascript
+import Vue from 'vue';
+import VueI18n from 'vue-i18n';
+import App from './App';
+import FormItem from './plugin/FormItem';
+
+Vue.use(VueI18n);
+
+new Vue({
+    i18n,
+    render: h => h(App),
+    created() {
+        Vue.use(FormItem, {
+            trans: this.$t,
+        });
+    }
+}).$mount('#app');
+```
+
 ## Props
 
 ### input {Object} -  required

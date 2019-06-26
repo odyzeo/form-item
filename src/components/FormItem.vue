@@ -316,10 +316,10 @@ export default {
         },
         translate(key) {
             if (typeof this.trans === 'function') {
-                return this.trans(key);
+                return this.trans.bind(this)(key);
             }
 
-            return this.$formItem.trans(key);
+            return this.$formItem.trans.bind(this)(key);
         },
     },
 };
