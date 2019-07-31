@@ -1,3 +1,5 @@
+import { doPolyfill } from '../utils/utils';
+
 const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const telRegex = /^(\+421 ?|0)(\d{3} ?){2}\d{3}$/;
 const zipRegex = /^\d{3} ?\d{2}$/;
@@ -35,6 +37,7 @@ export default {
     },
     confirmed: {
         test(value, attrs, input) {
+            doPolyfill();
             return value === input.closest('form').querySelector(`[name="${attrs[0]}"]`).value;
         },
         message: 'Hesla sa nezhodujú.',
