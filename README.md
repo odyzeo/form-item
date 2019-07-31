@@ -215,7 +215,7 @@ Used for adding custom class to input/textarea element.
 ## Global methods
 Methods called on `$formItem` object installed on main Vue instance
 
-### $formItem.validate( name )
+### $formItem.validate(name)
 - Arguments:
     - `{string} name` Group name of one or multiple form items
     
@@ -223,7 +223,7 @@ Methods called on `$formItem` object installed on main Vue instance
 
     Trigger validation of all form items corresponding to group name argument
    
-### $formItem.clear( name )
+### $formItem.clear(name)
 - Arguments:
     - `{string} name` Group name of one or multiple form items
    
@@ -231,7 +231,7 @@ Methods called on `$formItem` object installed on main Vue instance
 
     Clear inputs and errors on all form items corresponding to group name argument
 
-### $formItem.getErrors( name )
+### $formItem.getErrors(name)
 - Arguments:
     - `{string} name` Group name of one or multiple form items
    
@@ -242,6 +242,12 @@ Methods called on `$formItem` object installed on main Vue instance
 
     Get all current FE errors of all form items corresponding to group name argument 
 
+### $formItem.hasErrors(name)
+- Arguments:
+    - `{string} name` Group name of one or multiple form items
+   
+- Returns: 
+    - Boolean indicating whether group of items got errors
 
 ## Events
 Component emits these events:

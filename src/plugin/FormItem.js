@@ -1,5 +1,25 @@
 import FormItem from '../components/FormItem';
 
+/**
+ * .closest() polyfill for IE
+ */
+if (!Element.prototype.matches) {
+    Element.prototype.matches = Element.prototype.msMatchesSelector ||
+        Element.prototype.webkitMatchesSelector;
+}
+
+if (!Element.prototype.closest) {
+    Element.prototype.closest = function closest(s) {
+        let el = this;
+
+        do {
+            if (el.matches(s)) return el;
+            el = el.parentElement || el.parentNode;
+        } while (el !== null && el.nodeType === 1);
+        return null;
+    };
+}
+
 const Plugin = {
     install(Vue, options = {}) {
         /**
@@ -29,7 +49,7 @@ const Plugin = {
                 .filter(item => item.groupName !== '' && item.groupName === name)
                 .forEach((item) => {
                     item[functionName]();
-            });
+                });
         }
 
         function getErrors(name) {
@@ -41,7 +61,7 @@ const Plugin = {
                     if (item.errors.length > 0) {
                         errors.push(...item.errors);
                     }
-            });
+                });
 
             return errors;
         }
@@ -78,6 +98,9 @@ const Plugin = {
             },
             getErrors(name) {
                 return getErrors(name);
+            },
+            hasErrors(name) {
+                return getErrors(name).length > 0;
             },
 
             // properties
