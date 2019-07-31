@@ -49,6 +49,8 @@
                     :multiple="input.multiple"
                     :name="input.name"
                     :pattern="input.pattern"
+                    :min="input.min"
+                    :max="input.max"
                     :placeholder="translate(input.placeholder)"
                     :readonly="isReadonly"
                     :required="isRequired"
