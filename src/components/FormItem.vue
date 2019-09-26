@@ -29,6 +29,7 @@
                     :placeholder="translate(input.placeholder)"
                     :readonly="isReadonly"
                     :required="isRequired"
+                    :autofocus="input.autofocus"
                     :rows="input.rows"
                     v-bind="bindToInput"
                     v-model="localValue"
@@ -54,6 +55,7 @@
                     :placeholder="translate(input.placeholder)"
                     :readonly="isReadonly"
                     :required="isRequired"
+                    :autofocus="input.autofocus"
                     :type="type"
                     v-bind="bindToInput"
                     v-model="localValue"
@@ -115,7 +117,7 @@ export default {
             default: () => ([]),
         },
         value: {
-            type: [Number, String],
+            type: [String, Number, Boolean, Date, Symbol],
             default: '',
         },
         bindToInput: {
