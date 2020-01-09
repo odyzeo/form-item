@@ -50,6 +50,7 @@
                     :multiple="input.multiple"
                     :name="input.name"
                     :pattern="input.pattern"
+                    :step="input.step"
                     :min="input.min"
                     :max="input.max"
                     :placeholder="translate(input.placeholder)"
@@ -218,14 +219,14 @@ export default {
         this.$formItem.event.$emit('unsubscribe', this);
     },
     methods: {
-        focus() {
-            this.$emit('focus');
+        focus(ev) {
+            this.$emit('focus', ev);
         },
         blur(ev) {
             ev.target.value = this.localValue;
 
             this.validateByEventType(ev.type);
-            this.$emit('blur');
+            this.$emit('blur', ev);
         },
         validate(scroll = false) {
             this.errors = [];
