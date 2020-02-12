@@ -106,6 +106,7 @@ export default {
                 validatorEvent: 'onBlurThenOnInput',
             },
             full: {
+                id: 'full-email',
                 type: 'email',
                 name: 'email',
                 required: true,
