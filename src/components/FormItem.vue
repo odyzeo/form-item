@@ -18,13 +18,16 @@
                 class="form-item__hider"
             ></div>
 
-            <div class="form-item__wrapper">
+            <label
+                class="form-item__wrapper"
+                :for="input.id"
+            >
                 <textarea
                     v-if="isTextArea"
                     ref="input"
                     :autocomplete="autocomplete"
                     :class="inputClass"
-                    :id="uid"
+                    :id="input.id"
                     :name="input.name"
                     :placeholder="translate(input.placeholder)"
                     :readonly="isReadonly"
@@ -46,7 +49,7 @@
                     :accept="input.accept"
                     :autocomplete="autocomplete"
                     :class="inputClass"
-                    :id="uid"
+                    :id="input.id"
                     :multiple="input.multiple"
                     :name="input.name"
                     :pattern="input.pattern"
@@ -67,14 +70,13 @@
                     @keydown="keydown"
                 >
 
-                <label
+                <span
                     v-if="showLabel"
-                    :for="uid"
                     class="form-item__label"
                 >
                     {{ translate(input.label) }}
-                </label>
-            </div>
+                </span>
+            </label>
 
             <slot name="append"></slot>
         </div>
@@ -152,10 +154,6 @@ export default {
         };
     },
     computed: {
-        uid() {
-            // eslint-disable-next-line no-underscore-dangle
-            return `form-item-${this._uid}`;
-        },
         isFilled() {
             return typeof this.localValue !== 'undefined' && `${this.localValue}`.length > 0;
         },

@@ -154,6 +154,7 @@ new Vue({
 | `rows` | number, string | `` | Number of rows textarea should have |
 | `autocomplete` | string | `off` | HTML5 autocomplete attribute, check [docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for more info and possible values |
 | `pattern` | string | `` | Pattern attribute specifies a regular expression that the <input> element's value is checked against on form submission |
+| `id` | string | `` | Id for input or textarea and for respective label |
 
 ### groupName {string = ''} - optional 
 Set if you need to target one or more form item components with global methods
