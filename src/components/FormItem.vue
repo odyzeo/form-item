@@ -144,7 +144,7 @@ export default {
         return {
             autocomplete,
             type,
-            localValue: this.value || '',
+            localValue: this.value ?? '',
             errors: [],
             validating: false,
             isTextArea: type === 'textarea',
@@ -193,7 +193,7 @@ export default {
     },
     watch: {
         value(n) {
-            this.localValue = (typeof n === 'undefined') ? '' : n;
+            this.localValue = n ?? '';
             /**
              * When value change hide errors.
              * @type {boolean}
