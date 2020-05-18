@@ -19,8 +19,8 @@
             ></div>
 
             <label
-                class="form-item__wrapper"
                 :for="input.id"
+                class="form-item__wrapper"
             >
                 <textarea
                     v-if="isTextArea"
@@ -258,9 +258,10 @@ export default {
                 if (typeof rawValidator.validator === 'function') {
                     const { validator } = rawValidator;
                     const { message = 'Custom error message' } = rawValidator;
+                    const translatedMessage = this.translate(message);
 
                     if (!validator(this.localValue)) {
-                        this.errors.push(message);
+                        this.errors.push(translatedMessage);
                     }
 
                     return;
