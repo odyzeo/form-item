@@ -17,6 +17,7 @@
             class="form-item--group"
             input-class="custom-class-for-input"
             group-name="form-item-form-1"
+            :trans="customTranslate"
         >
             <template slot="prepend">
                 <div class="form-item__readonly">Your</div>
@@ -127,7 +128,6 @@ export default {
                     },
                     {
                         validator: myFunc('john.'),
-                        message: 'Your email should start with john.doe',
                     },
                 ],
                 validatorEvent: 'onBlur',
