@@ -260,8 +260,11 @@ export default {
                     validator,
                 } = rawValidator;
 
-                if (typeof validator === 'function' && !validator(this.localValue)) {
-                    this.errors.push(this.translate(message));
+                if (typeof validator === 'function') {
+                    if (!validator(this.localValue)) {
+                        this.errors.push(this.translate(message));
+                    }
+
                     return;
                 }
 
