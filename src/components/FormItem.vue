@@ -255,15 +255,15 @@ export default {
         },
         validateTypes() {
             this.inputValidators.forEach((rawValidator) => {
-                const { validator } = rawValidator;
-                const { message = 'Custom error message' } = rawValidator;
+                const {
+                    message = 'Custom error message',
+                    validator,
+                } = rawValidator;
 
-                if (typeof rawValidator.validator === 'function'
-                    && !validator(this.localValue)) {
-                        this.errors.push(this.translate(message));
-
-                        return;
-                    }
+                if (typeof validator === 'function' && !validator(this.localValue)) {
+                    this.errors.push(this.translate(message));
+                    return;
+                }
 
                 const [command, rawAttrs] = validator.split(':');
                 const attrs = rawAttrs ? rawAttrs.split(',') : [];
@@ -328,5 +328,5 @@ export default {
 </script>
 
 <style lang="less">
-    @import '../less/form-item.less';
+@import '../less/form-item.less';
 </style>
