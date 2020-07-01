@@ -176,7 +176,12 @@ export default {
             return this.isTextArea && this.input.label;
         },
         getType() {
-            return type => type.split(':')[0];
+            return type => {
+                if (typeof type !== 'string') {
+                    return '';
+                }
+                return type.split(':')[0];
+            };
         },
         validator() {
             return type => this.inputValidators

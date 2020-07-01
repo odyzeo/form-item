@@ -124,10 +124,10 @@ export default {
                         validator: 'email',
                     },
                     {
-                        validator: 'required',
+                        validator: myFunc('john.'),
                     },
                     {
-                        validator: myFunc('john.'),
+                        validator: 'required',
                     },
                 ],
                 validatorEvent: 'onBlur',
