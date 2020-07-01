@@ -19,8 +19,8 @@
             ></div>
 
             <label
-                class="form-item__wrapper"
                 :for="input.id"
+                class="form-item__wrapper"
             >
                 <textarea
                     v-if="isTextArea"
@@ -255,27 +255,26 @@ export default {
         },
         validateTypes() {
             this.inputValidators.forEach((rawValidator) => {
-                if (typeof rawValidator.validator === 'function') {
-                    const { validator } = rawValidator;
-                    const { message = 'Custom error message' } = rawValidator;
+                const {
+                    message = 'Custom error message',
+                    validator,
+                } = rawValidator;
 
-                    if (!validator(this.localValue)) {
-                        this.errors.push(message);
-                    }
-
+                if (typeof validator === 'function' && !validator(this.localValue)) {
+                    this.errors.push(this.translate(message));
                     return;
                 }
 
-                const [command, rawAttrs] = rawValidator.validator.split(':');
+                const [command, rawAttrs] = validator.split(':');
                 const attrs = rawAttrs ? rawAttrs.split(',') : [];
-                const validator = VALIDATORS[command];
+                const validatorType = VALIDATORS[command];
+                const isError = validatorType.test
+                    && !validatorType.test(this.localValue, attrs, this.$refs.input);
 
-                const isError = validator.test
-                    && !validator.test(this.localValue, attrs, this.$refs.input);
                 if (isError) {
-                    const message = this.validator(command).message || validator.message;
-                    const translatedMessage = this.translate(message);
-                    const replaceNumbers = translatedMessage
+                    const customMessage = this.validator(command).message
+                        || validatorType.message;
+                    const replaceNumbers = this.translate(customMessage)
                         .replace(/\$(\d+)/g, (match, number) => attrs[+number]);
                     this.errors.push(replaceNumbers);
                 }
