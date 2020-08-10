@@ -146,6 +146,7 @@ new Vue({
 | `name` | string | `` | Textarea or input `name` attribute |
 | `label` | string | `''` | Label name for input |
 | `required` | boolean | `false` | If value is required |
+| `disabled` | boolean | `false` | Set input to disabled state, validator would skip this field |
 | `readonly` | boolean | `false` | If field is read only |
 | `placeholder` | string | `` | Native placeholder attribute for input/textarea |
 | `accept` | string |  | Which file types should be accepted if type is file |

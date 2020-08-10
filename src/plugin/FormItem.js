@@ -28,7 +28,7 @@ const Plugin = {
             Plugin.activeItems.filter(item => item.groupName !== '' && item.groupName === name)
                 .forEach((item) => {
                     item[functionName]();
-                });
+            });
         }
 
         function getErrors(name) {
@@ -39,7 +39,7 @@ const Plugin = {
                     if (item.errors.length > 0) {
                         errors.push(...item.errors);
                     }
-                });
+            });
 
             return errors;
         }
