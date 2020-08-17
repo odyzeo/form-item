@@ -7,6 +7,7 @@
             'form-item--required': isRequired,
             'form-item--readonly': isReadonly,
             'form-item--hidden': isHidden,
+            'form-item--disabled': isDisabled,
         }"
         class="form-item"
     >
@@ -32,6 +33,7 @@
                     :placeholder="translate(input.placeholder)"
                     :readonly="isReadonly"
                     :required="isRequired"
+                    :disabled="isDisabled"
                     :autofocus="input.autofocus"
                     :rows="input.rows"
                     v-bind="bindToInput"
@@ -58,6 +60,7 @@
                     :max="input.max"
                     :placeholder="translate(input.placeholder)"
                     :readonly="isReadonly"
+                    :disabled="isDisabled"
                     :required="isRequired"
                     :autofocus="input.autofocus"
                     :type="type"
@@ -166,6 +169,9 @@ export default {
         isReadonly() {
             return this.input.readonly;
         },
+        isDisabled() {
+            return this.input.disabled;
+        },
         isRequired() {
             return this.input.required;
         },
@@ -176,7 +182,7 @@ export default {
             return this.isTextArea && this.input.label;
         },
         getType() {
-            return type => {
+            return (type) => {
                 if (typeof type !== 'string') {
                     return '';
                 }
@@ -233,6 +239,10 @@ export default {
         },
         validate(scroll = false) {
             this.errors = [];
+
+            if (this.isDisabled) {
+                return;
+            }
 
             if (
                 this.input.required
