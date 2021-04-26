@@ -128,8 +128,7 @@ export default {
         },
         bindToInput: {
             type: Object,
-            default: () => {
-            },
+            default: null,
         },
         inputClass: {
             type: String,
@@ -141,22 +140,24 @@ export default {
         },
     },
     data() {
-        const autocomplete = this.input.autocomplete || 'off';
-        const type = this.input.type || 'text';
-
         return {
-            autocomplete,
-            type,
             localValue: this.value != null ? this.value : '',
             errors: [],
-            validating: false,
-            isTextArea: type === 'textarea',
             showFormErrors: (this.formErrors.length > 0),
             hadErrorState: false,
             inputValidators: null,
         };
     },
     computed: {
+        autocomplete() {
+            return this.input.autocomplete || 'off';
+        },
+        type() {
+            return this.input.type || 'text';
+        },
+        isTextArea() {
+            return this.type === 'textarea';
+        },
         isFilled() {
             return typeof this.localValue !== 'undefined' && `${this.localValue}`.length > 0;
         },
@@ -180,19 +181,6 @@ export default {
         },
         showHider() {
             return this.isTextArea && this.input.label;
-        },
-        getType() {
-            return (type) => {
-                if (typeof type !== 'string') {
-                    return '';
-                }
-                return type.split(':')[0];
-            };
-        },
-        validator() {
-            return type => this.inputValidators
-                && this.inputValidators
-                    .find(validator => this.getType(validator.validator) === type);
         },
         validatorEvent() {
             return this.input.validatorEvent || 'none';
@@ -338,6 +326,17 @@ export default {
             }
 
             return this.$formItem.trans.bind(this)(key);
+        },
+        getType(type) {
+            if (typeof type !== 'string') {
+                return '';
+            }
+            return type.split(':')[0];
+        },
+        validator(type) {
+            return this.inputValidators
+                && this.inputValidators
+                    .find(validator => this.getType(validator.validator) === type);
         },
     },
 };

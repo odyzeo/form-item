@@ -2,7 +2,7 @@
     "name": "@odyzeo/form-item",
     "version": "2.4.0",
     "description": "Odyzeo form item component with Vue",
-    "main": "dist/form-item.umd.js",
+    "main": "dist/form-item.common.js",
     "keywords": [
         "odyzeo",
         "form",
@@ -32,10 +32,6 @@
         "*.json",
         ".js"
     ],
-    "dependencies": {
-        "normalize.css": "^8.0.1",
-        "vue": "^2.6.11"
-    },
     "devDependencies": {
         "@vue/cli-plugin-babel": "^3.12.1",
         "@vue/cli-plugin-eslint": "^3.12.1",
@@ -43,6 +39,8 @@
         "@vue/eslint-config-airbnb": "^4.0.1",
         "less": "^3.11.1",
         "less-loader": "^5.0.0",
+        "normalize.css": "^8.0.1",
+        "vue": "^2.6.11",
         "vue-template-compiler": "^2.6.11"
     },
     "eslintConfig": {
