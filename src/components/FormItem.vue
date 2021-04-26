@@ -218,10 +218,8 @@ export default {
             this.hadErrorState = true;
         },
     },
-    created() {
-        this.$formItem.event.$emit('subscribe', this);
-    },
     mounted() {
+        this.$formItem.event.$emit('subscribe', this);
         this.inputValidators = this.input.validators || null;
     },
     beforeDestroy() {
