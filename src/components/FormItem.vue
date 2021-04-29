@@ -25,10 +25,11 @@
             >
                 <textarea
                     v-if="isTextArea"
+                    :id="input.id"
                     ref="input"
+                    v-model="localValue"
                     :autocomplete="autocomplete"
                     :class="inputClass"
-                    :id="input.id"
                     :name="input.name"
                     :placeholder="translate(input.placeholder)"
                     :readonly="isReadonly"
@@ -37,7 +38,6 @@
                     :autofocus="input.autofocus"
                     :rows="input.rows"
                     v-bind="bindToInput"
-                    v-model="localValue"
                     class="form-item__input"
                     @blur="blur"
                     @focus="focus"
@@ -47,11 +47,12 @@
 
                 <input
                     v-else
+                    :id="input.id"
                     ref="input"
+                    v-model="localValue"
                     :accept="input.accept"
                     :autocomplete="autocomplete"
                     :class="inputClass"
-                    :id="input.id"
                     :multiple="input.multiple"
                     :name="input.name"
                     :pattern="input.pattern"
@@ -65,7 +66,6 @@
                     :autofocus="input.autofocus"
                     :type="type"
                     v-bind="bindToInput"
-                    v-model="localValue"
                     class="form-item__input"
                     @blur="blur"
                     @focus="focus"
@@ -86,29 +86,23 @@
 
         <slot name="result"></slot>
 
-        <template v-if="showFormErrors">
-            <div
-                v-for="(error, key) in formErrors"
-                :key="`be_error_${key}`"
-                class="form-item__error"
-                v-html="translate(error)"
-            ></div>
-        </template>
-        <div v-else>
-            <div
-                v-for="(error, key) in errors"
-                :key="`fe_error_${key}`"
-                class="form-item__error"
-                v-html="error"
-            ></div>
-        </div>
+        <form-errors
+            v-if="showFormErrors"
+            :form-errors="formErrors"
+        ></form-errors>
+        <form-errors
+            v-else
+            :form-errors="errors"
+        ></form-errors>
     </div>
 </template>
 
 <script>
 import VALIDATORS from '@/constants/validators';
+import FormErrors from '@/components/FormErrors';
 
 export default {
+    components: { FormErrors },
     props: {
         groupName: {
             type: String,
@@ -336,12 +330,12 @@ export default {
         validator(type) {
             return this.inputValidators
                 && this.inputValidators
-                    .find(validator => this.getType(validator.validator) === type);
+                    .find((validator) => this.getType(validator.validator) === type);
         },
     },
 };
 </script>
 
 <style lang="less">
-@import '../less/form-item.less';
+@import '~@/less/form-item.less';
 </style>

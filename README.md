@@ -7,13 +7,7 @@ Simple input and textarea Vue.js component.
 ### npm
 
 ```
-npm install --save @odyzeo/form-item
-```
-
-### yarn
-
-```
-yarn add @odyzeo/form-item
+npm install @odyzeo/form-item
 ```
 
 Import and initiate component with possibility to change its default name with options:
@@ -21,9 +15,12 @@ Import and initiate component with possibility to change its default name with o
 `componentName {string = 'form-item'}` - optional
 
 ```
-import FormItem from '@odyzeo/form-item';
+import FormItemPlugin, { FormErrors, FormItem, TextareaAutoresize }  from '@odyzeo/form-item';
 
-Vue.use(FormItem, {options})
+Vue.use(FormItemPlugin);
+// Vue.component('FormItem', FormItem); // Installed w/ FormItemPlugin
+Vue.component('FormErrors', FormErrors);
+Vue.directive('textarea-autoresize', TextareaAutoresize);
 ```
 
 Import styles or make your own.
@@ -59,6 +56,18 @@ import '@odyzeo/form-item/dist/form-item.css';
           <div class="form-item__readonly">Please</div>
         </template>
       </form-item>
+
+      <form-item
+          :ref="textarea.name"
+          v-model="textarea.value"
+          v-textarea-autoresize:window="{ max: 200 }"
+          :input="textarea"
+          :trans="customTranslate"
+      ></form-item>
+
+      <form-errors
+          :form-errors="formErrors"
+      ></form-errors>
   </div>
 </template>
 ```
@@ -100,7 +109,17 @@ export default {
                 value: '',
             },
             requiredMessage: 'Povinné',
-            formErrors: {},
+            formErrors: {
+                email: ['E-mail is required'],
+            },
+            textarea: {
+                name: 'textarea',
+                type: 'textarea',
+                label: 'Textarea',
+                placeholder: 'Textarea placeholder',
+                rows: 3,
+                value: 'Some text just for textarea',
+            },
         };
     },
     methods: {
@@ -253,9 +272,9 @@ Methods called on `$formItem` object installed on main Vue instance
 
 ## Events
 Component emits these events:
-- `focus`
-- `blur`
-- `input` : emits with value of the element
+- `@focus`
+- `@blur`
+- `@input` - emits the value of the element
 - `keydown`
 
 ## Development
@@ -263,15 +282,3 @@ Component emits these events:
 ```
 npm run serve
 ```
-
-or
-
-```bash
-yarn serve
-```
-
-# TODO
-- integrate some mask (v-mask or vue-inputmask or custom) for zip and phone
-- add total maxLength to textarea
-- add maxLength per line to textarea
-- add maxRows to textarea

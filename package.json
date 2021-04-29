@@ -18,7 +18,7 @@
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "build-lib": "vue-cli-service build --target lib --name form-item ./src/plugin/FormItem.js",
+        "build-lib": "vue-cli-service build --target lib --name form-item ./src/index.js",
         "lint": "vue-cli-service lint"
     },
     "repository": {
@@ -33,15 +33,18 @@
         ".js"
     ],
     "devDependencies": {
-        "@vue/cli-plugin-babel": "^3.12.1",
-        "@vue/cli-plugin-eslint": "^3.12.1",
-        "@vue/cli-service": "^3.12.1",
-        "@vue/eslint-config-airbnb": "^4.0.1",
-        "less": "^3.11.1",
-        "less-loader": "^5.0.0",
+        "@vue/cli-plugin-babel": "^4.5.12",
+        "@vue/cli-plugin-eslint": "^4.5.12",
+        "@vue/cli-service": "^4.5.12",
+        "@vue/eslint-config-airbnb": "^5.3.0",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^7.25.0",
+        "eslint-plugin-vue": "^7.9.0",
+        "less": "^4.1.1",
+        "less-loader": "^7.3.0",
         "normalize.css": "^8.0.1",
-        "vue": "^2.6.11",
-        "vue-template-compiler": "^2.6.11"
+        "vue": "^2.6.12",
+        "vue-template-compiler": "^2.6.12"
     },
     "eslintConfig": {
         "root": true,
@@ -102,5 +105,8 @@
     "browserslist": [
         "defaults",
         "> 0.5% in SK"
-    ]
+    ],
+    "dependencies": {
+        "lodash.debounce": "^4.0.8"
+    }
 }

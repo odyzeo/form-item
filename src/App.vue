@@ -1,9 +1,12 @@
 <template>
     <div
         id="app"
-        class="app">
+        class="app"
+    >
         <div class="container">
-            <h1 class="text-center">Form item</h1>
+            <h1 class="text-center">
+                Form item
+            </h1>
 
             <inputs
                 :be-errors="beErrors"
@@ -66,5 +69,5 @@ export default {
 </script>
 
 <style lang="less">
-@import '../src/less/app.less';
+@import '~@/less/app.less';
 </style>

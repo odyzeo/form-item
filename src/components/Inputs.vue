@@ -2,52 +2,57 @@
     <div>
         <h3>Simple: {{ simple.value }}</h3>
         <form-item
-            :input="simple"
-            v-model="simple.value"
             :ref="simple.name"
+            v-model="simple.value"
+            :input="simple"
         ></form-item>
 
         <h3>Full example: {{ full.value }}</h3>
         <form-item
             :ref="full.name"
+            v-model="full.value"
             :bind-to-input="{ 'data-hj-whitelist': true }"
             :form-errors="beErrors.full"
             :input="full"
-            v-model="full.value"
             :trans="customTranslate"
             class="form-item--group"
             input-class="custom-class-for-input"
             group-name="form-item-form-1"
         >
             <template slot="prepend">
-                <div class="form-item__readonly">Your</div>
+                <div class="form-item__readonly">
+                    Your
+                </div>
             </template>
             <template slot="append">
-                <div class="form-item__readonly">Please</div>
+                <div class="form-item__readonly">
+                    Please
+                </div>
             </template>
         </form-item>
 
         <h3>Number: {{ number.value }}</h3>
         <form-item
-            :input="number"
-            v-model="number.value"
             :ref="number.name"
+            v-model="number.value"
+            :input="number"
             group-name="form-item-form-1"
         ></form-item>
 
         <h3>ZIP (with validator): {{ zip.value }}</h3>
         <form-item
-            :input="zip"
-            v-model="zip.value"
             :ref="zip.name"
+            v-model="zip.value"
+            :input="zip"
             group-name="form-item-form-1"
         ></form-item>
 
         <h3>Textarea: {{ textarea.value }}</h3>
         <form-item
-            :input="textarea"
-            v-model="textarea.value"
             :ref="textarea.name"
+            v-model="textarea.value"
+            v-textarea-autoresize:window="{ max: 200 }"
+            :input="textarea"
             :trans="customTranslate"
         ></form-item>
 
@@ -55,25 +60,27 @@
         <p>
             Start:
             <form-item
-                :input="hidden"
-                v-model="hidden.value"
                 :ref="hidden.name"
+                v-model="hidden.value"
+                :input="hidden"
                 group-name="form-item-form-1"
             ></form-item>
             end;
         </p>
         <p>
             Set hidden value:<br>
-            <input
-                v-model="hidden.value"
-                type="text"
-            >
+            <label>
+                <input
+                    v-model="hidden.value"
+                    type="text"
+                >
+            </label>
         </p>
     </div>
 </template>
 
 <script>
-const myFunc = param => value => value.indexOf(`${param}doe`) !== -1;
+const myFunc = (param) => (value) => value.indexOf(`${param}doe`) !== -1;
 
 export default {
     props: {
@@ -150,7 +157,7 @@ export default {
                 type: 'textarea',
                 label: 'Textarea',
                 placeholder: 'Textarea placeholder',
-                rows: 10,
+                rows: 3,
                 value: 'Some text just for textarea',
             },
             hidden: {

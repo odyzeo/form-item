@@ -1,4 +1,4 @@
-import FormItem from '../components/FormItem';
+import FormItem from '@/components/FormItem';
 
 const Plugin = {
     install(Vue, options = {}) {
@@ -25,7 +25,7 @@ const Plugin = {
         }
 
         function callFunctionOnFormItem(name, functionName) {
-            Plugin.activeItems.filter(item => item.groupName !== '' && item.groupName === name)
+            Plugin.activeItems.filter((item) => item.groupName !== '' && item.groupName === name)
                 .forEach((item) => {
                     item[functionName]();
             });
@@ -34,7 +34,7 @@ const Plugin = {
         function getErrors(name) {
             const errors = [];
 
-            Plugin.activeItems.filter(item => item.groupName !== '' && item.groupName === name)
+            Plugin.activeItems.filter((item) => item.groupName !== '' && item.groupName === name)
                 .forEach((item) => {
                     if (item.errors.length > 0) {
                         errors.push(...item.errors);
@@ -48,7 +48,7 @@ const Plugin = {
          * Main logic
          */
         const defaultComponentName = 'form-item';
-        const defaultTrans = key => key;
+        const defaultTrans = (key) => key;
         const {
             componentName = defaultComponentName,
             trans = defaultTrans,
