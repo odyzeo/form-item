@@ -2,6 +2,8 @@
 
 Simple input and textarea Vue.js component.
 
+<a href="https://form-item.vercel.app/" target="_blank">Demo</a>
+
 ## Installation
 
 ### npm
