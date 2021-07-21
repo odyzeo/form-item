@@ -1,7 +1,7 @@
-import FormErrors from '@/components/FormErrors';
-import FormItem from '@/components/FormItem';
-import FormItemPlugin from '@/plugin/FormItem';
-import TextareaAutoresize from '@/directives/TextareaAutoresize';
+import FormErrors from './components/FormErrors';
+import FormItem from './components/FormItem';
+import FormItemPlugin from './plugin/FormItem';
+import TextareaAutoresize from './directives/TextareaAutoresize';
 
 export { FormErrors };
 export { FormItem };

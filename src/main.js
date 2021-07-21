@@ -1,9 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Vue from 'vue';
-import FormItemPlugin from '@/plugin/FormItem';
-import App from '@/App';
-import Inputs from '@/components/Inputs';
-import TextareaAutoresize from '@/directives/TextareaAutoresize';
+import FormItemPlugin from './plugin/FormItem';
+import App from './App';
+import Inputs from './components/Inputs';
+import TextareaAutoresize from './directives/TextareaAutoresize';
 
 Vue.component('Inputs', Inputs);
 

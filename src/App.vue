@@ -69,5 +69,5 @@ export default {
 </script>
 
 <style lang="less">
-@import '~@/less/app.less';
+@import './less/app.less';
 </style>

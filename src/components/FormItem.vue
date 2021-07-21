@@ -98,8 +98,8 @@
 </template>
 
 <script>
-import VALIDATORS from '@/constants/validators';
-import FormErrors from '@/components/FormErrors';
+import VALIDATORS from '../constants/validators';
+import FormErrors from './FormErrors';
 
 export default {
     components: { FormErrors },
@@ -337,5 +337,5 @@ export default {
 </script>
 
 <style lang="less">
-@import '~@/less/form-item.less';
+@import '../less/form-item.less';
 </style>

@@ -1,4 +1,4 @@
-import FormItem from '@/components/FormItem';
+import FormItem from '../components/FormItem';
 
 const Plugin = {
     install(Vue, options = {}) {
