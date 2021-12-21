@@ -1,5 +1,5 @@
 <template>
-    <div :class="className">
+    <div :class="componentClassName">
         <div :class="$options.CLASS_NAME.field">
             <slot name="prepend"></slot>
 
@@ -92,6 +92,10 @@ export default {
     CLASS_NAME: {},
     components: { FormErrors },
     props: {
+        className: {
+            type: String,
+            default: null,
+        },
         groupName: {
             type: String,
             default: '',
@@ -134,7 +138,7 @@ export default {
         autocomplete() {
             return this.input.autocomplete || 'off';
         },
-        className() {
+        componentClassName() {
             return {
                 [this.getClassName()]: true,
                 [this.getClassName(null, 'filled')]: this.isFilled,
@@ -340,7 +344,7 @@ export default {
             return this.$formItem.trans.bind(this)(key);
         },
         getClassName(element = null, modifier = null) {
-            let { className } = this.$formItem;
+            let className = this.className ?? this.$formItem.className;
             if (element) {
                 className = `${className}__${element}`;
             }

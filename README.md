@@ -176,6 +176,9 @@ new Vue({
 | `pattern` | string | `` | Pattern attribute specifies a regular expression that the <input> element's value is checked against on form submission |
 | `id` | string | `` | Id for input or textarea and for respective label |
 
+### className {string = ''} - optional 
+Set component block className (set B in BEM), has priority over `className` option in plugin.
+
 ### groupName {string = ''} - optional 
 Set if you need to target one or more form item components with global methods
 

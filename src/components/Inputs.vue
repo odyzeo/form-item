@@ -7,6 +7,14 @@
             :input="simple"
         ></form-item>
 
+        <h3>Simple naked</h3>
+        <form-item
+            :ref="simple.name"
+            v-model="simple.value"
+            class-name="naked"
+            :input="simple"
+        ></form-item>
+
         <h3>Full example: {{ full.value }}</h3>
         <form-item
             :ref="full.name"
