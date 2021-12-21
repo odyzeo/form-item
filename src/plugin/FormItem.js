@@ -47,15 +47,18 @@ const Plugin = {
         /**
          * Main logic
          */
+        const defaultClassName = 'form-item';
         const defaultComponentName = 'form-item';
         const defaultTrans = (key) => key;
         const {
+            className = defaultClassName,
             componentName = defaultComponentName,
             trans = defaultTrans,
         } = options;
 
         this.installed = true;
         this.event = new Vue();
+        this.className = className;
         this.componentName = componentName;
         this.activeItems = [];
 
@@ -80,6 +83,8 @@ const Plugin = {
             hasErrors(name) {
                 return getErrors(name).length > 0;
             },
+
+            className,
 
             // properties
             event: this.event,

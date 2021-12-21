@@ -12,21 +12,17 @@ Simple input and textarea Vue.js component.
 npm install @odyzeo/form-item
 ```
 
-Import and initiate component with possibility to change its default name with options:
-
-`componentName {string = 'form-item'}` - optional
-
+Import and register component:
 ```
 import FormItemPlugin, { FormErrors, FormItem, TextareaAutoresize }  from '@odyzeo/form-item';
 
-Vue.use(FormItemPlugin);
+Vue.use(FormItemPlugin, options);
 // Vue.component('FormItem', FormItem); // Installed w/ FormItemPlugin
 Vue.component('FormErrors', FormErrors);
 Vue.directive('textarea-autoresize', TextareaAutoresize);
 ```
 
-Import styles or make your own.
-
+Import styles or make your own:
 ```
 import '@odyzeo/form-item/dist/form-item.css';
 ```
@@ -134,9 +130,11 @@ export default {
 ```
 
 ## Plugin options
-| Property name | Type     | Default value | Description                                              |
-| ------------- | -------- | ------------- | -------------------------------------------------------- |
-| `trans`       | function | `null`        | Enable translating or modifying labels and placeholders. |
+| Property name  | Type     | Default value  | Description                                              |
+| -------------- | -------- | -------------- | -------------------------------------------------------- |
+| `className`    | String   | 'form-item'    | Set component block className (set B in BEM)             |
+| `componentName`| String   | 'form-item'    | Set component name                                       |
+| `trans`        | function | `(key) => key` | Enable translating or modifying labels and placeholders. |
 
 ### Example using vui-i18n
 ```javascript

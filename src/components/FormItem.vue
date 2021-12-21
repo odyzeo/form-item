@@ -1,27 +1,16 @@
 <template>
-    <div
-        :class="{
-            'form-item--filled': isFilled,
-            'form-item--error': isErrorClass,
-            'form-item--no-label': !showLabel,
-            'form-item--required': isRequired,
-            'form-item--readonly': isReadonly,
-            'form-item--hidden': isHidden,
-            'form-item--disabled': isDisabled,
-        }"
-        class="form-item"
-    >
-        <div class="form-item__field">
+    <div :class="className">
+        <div :class="$options.CLASS_NAME.field">
             <slot name="prepend"></slot>
 
             <div
                 v-if="showHider"
-                class="form-item__hider"
+                :class="$options.CLASS_NAME.hider"
             ></div>
 
             <label
                 :for="input.id"
-                class="form-item__wrapper"
+                :class="$options.CLASS_NAME.wrapper"
             >
                 <textarea
                     v-if="isTextArea"
@@ -29,7 +18,7 @@
                     ref="input"
                     v-model="localValue"
                     :autocomplete="autocomplete"
-                    :class="inputClass"
+                    :class="inputClassName"
                     :name="input.name"
                     :placeholder="translate(input.placeholder)"
                     :readonly="isReadonly"
@@ -38,7 +27,6 @@
                     :autofocus="input.autofocus"
                     :rows="input.rows"
                     v-bind="bindToInput"
-                    class="form-item__input"
                     @blur="blur"
                     @focus="focus"
                     @input="change"
@@ -52,7 +40,7 @@
                     v-model="localValue"
                     :accept="input.accept"
                     :autocomplete="autocomplete"
-                    :class="inputClass"
+                    :class="inputClassName"
                     :multiple="input.multiple"
                     :name="input.name"
                     :pattern="input.pattern"
@@ -66,7 +54,6 @@
                     :autofocus="input.autofocus"
                     :type="type"
                     v-bind="bindToInput"
-                    class="form-item__input"
                     @blur="blur"
                     @focus="focus"
                     @input="change"
@@ -75,7 +62,7 @@
 
                 <span
                     v-if="showLabel"
-                    class="form-item__label"
+                    :class="$options.CLASS_NAME.label"
                 >
                     {{ translate(input.label) }}
                 </span>
@@ -102,6 +89,7 @@ import VALIDATORS from '../constants/validators';
 import FormErrors from './FormErrors';
 
 export default {
+    CLASS_NAME: {},
     components: { FormErrors },
     props: {
         groupName: {
@@ -146,8 +134,26 @@ export default {
         autocomplete() {
             return this.input.autocomplete || 'off';
         },
+        className() {
+            return {
+                [this.getClassName()]: true,
+                [this.getClassName(null, 'filled')]: this.isFilled,
+                [this.getClassName(null, 'error')]: this.isErrorClass,
+                [this.getClassName(null, 'no-label')]: !this.showLabel,
+                [this.getClassName(null, 'required')]: this.isRequired,
+                [this.getClassName(null, 'readonly')]: this.isReadonly,
+                [this.getClassName(null, 'hidden')]: this.isHidden,
+                [this.getClassName(null, 'disabled')]: this.isDisabled,
+            };
+        },
         type() {
             return this.input.type || 'text';
+        },
+        inputClassName() {
+            return [
+                this.inputClass,
+                this.getClassName('input'),
+            ];
         },
         isTextArea() {
             return this.type === 'textarea';
@@ -200,6 +206,9 @@ export default {
             this.hadErrorState = true;
         },
     },
+    created() {
+        this.initClassName(this.$formItem.className);
+    },
     mounted() {
         this.$formItem.event.$emit('subscribe', this);
         this.inputValidators = this.input.validators || null;
@@ -208,6 +217,15 @@ export default {
         this.$formItem.event.$emit('unsubscribe', this);
     },
     methods: {
+        initClassName(block) {
+            this.$options.CLASS_NAME = {
+                component: block,
+                field: this.getClassName('field'),
+                hider: this.getClassName('hider'),
+                label: this.getClassName('label'),
+                wrapper: this.getClassName('wrapper'),
+            };
+        },
         focus(ev) {
             this.$emit('focus', ev);
         },
@@ -320,6 +338,16 @@ export default {
             }
 
             return this.$formItem.trans.bind(this)(key);
+        },
+        getClassName(element = null, modifier = null) {
+            let { className } = this.$formItem;
+            if (element) {
+                className = `${className}__${element}`;
+            }
+            if (modifier) {
+                className = `${className}--${modifier}`;
+            }
+            return className;
         },
         getType(type) {
             if (typeof type !== 'string') {
