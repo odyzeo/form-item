@@ -211,7 +211,7 @@ export default {
         },
     },
     created() {
-        this.initClassName(this.$formItem.className);
+        this.initClassName();
     },
     mounted() {
         this.$formItem.event.$emit('subscribe', this);
@@ -221,9 +221,8 @@ export default {
         this.$formItem.event.$emit('unsubscribe', this);
     },
     methods: {
-        initClassName(block) {
+        initClassName() {
             this.$options.CLASS_NAME = {
-                component: block,
                 field: this.getClassName('field'),
                 hider: this.getClassName('hider'),
                 label: this.getClassName('label'),
