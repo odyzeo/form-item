@@ -73,6 +73,8 @@ const Plugin = {
             // methods
             validate(name) {
                 callFunctionOnFormItem(name, 'validate');
+
+                return !this.hasErrors(name);
             },
             clear(name) {
                 callFunctionOnFormItem(name, 'clear');

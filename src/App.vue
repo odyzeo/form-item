@@ -46,15 +46,10 @@ export default {
     },
     methods: {
         submit() {
-            this.validateAll();
-
-            if (!this.$formItem.getErrors('form-item-form-1').length) {
+            if (this.$formItem.validate('form-item-form-1')) {
                 // eslint-disable-next-line no-console
                 console.log('no errors');
             }
-        },
-        validateAll() {
-            this.$formItem.validate('form-item-form-1');
         },
         clearErrors() {
             this.$formItem.clear('form-item-form-1');
