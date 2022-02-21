@@ -1,6 +1,6 @@
 {
     "name": "@odyzeo/form-item",
-    "version": "2.7.0",
+    "version": "2.7.1",
     "description": "Odyzeo form item component with Vue",
     "main": "dist/form-item.common.js",
     "module": "src/index.js",
