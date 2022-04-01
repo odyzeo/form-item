@@ -27,10 +27,11 @@
                     :autofocus="input.autofocus"
                     :rows="input.rows"
                     v-bind="bindToInput"
-                    @blur="blur"
-                    @focus="focus"
-                    @input="change"
-                    @keydown="keydown"
+                    @blur="onBlur"
+                    @focus="onFocus"
+                    @input="onInput"
+                    @keydown="onKeydown"
+                    @keyup="onKeyup"
                 ></textarea>
 
                 <input
@@ -54,10 +55,11 @@
                     :autofocus="input.autofocus"
                     :type="type"
                     v-bind="bindToInput"
-                    @blur="blur"
-                    @focus="focus"
-                    @input="change"
-                    @keydown="keydown"
+                    @blur="onBlur"
+                    @focus="onFocus"
+                    @input="onInput"
+                    @keydown="onKeydown"
+                    @keyup="onKeyup"
                 >
 
                 <span
@@ -229,10 +231,10 @@ export default {
                 wrapper: this.getClassName('wrapper'),
             };
         },
-        focus(ev) {
+        onFocus(ev) {
             this.$emit('focus', ev);
         },
-        blur(ev) {
+        onBlur(ev) {
             ev.target.value = this.localValue;
 
             this.validateByEventType(ev.type);
@@ -320,13 +322,17 @@ export default {
                 }
             }
         },
-        change(ev) {
+        onInput(ev) {
             this.validateByEventType(ev.type);
 
+            this.$emit('eager', ev);
             this.$emit('input', this.localValue);
         },
-        keydown(event) {
+        onKeydown(event) {
             this.$emit('keydown', event);
+        },
+        onKeyup(event) {
+            this.$emit('keyup', event);
         },
         clear() {
             this.localValue = '';

@@ -275,10 +275,12 @@ Methods called on `$formItem` object installed on main Vue instance
 
 ## Events
 Component emits these events:
-- `@focus`
 - `@blur`
-- `@input` - emits the value of the element
-- `keydown`
+- `@eager` - Emits event on 'input' event (get value from `event.currentTarget.value`)
+- `@focus`
+- `@input` - Emits the value of the element (not working w/ suggestions)
+- `@keydown`
+- `@keyup`
 
 ## Development
 
