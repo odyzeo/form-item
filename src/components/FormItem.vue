@@ -235,7 +235,10 @@ export default {
             this.$emit('focus', ev);
         },
         onBlur(ev) {
-            ev.target.value = this.localValue;
+            // On file input you can't update value for security reasons
+            if (this.input.type !== 'file') {
+                ev.target.value = this.localValue;
+            }
 
             this.validateByEventType(ev.type);
             this.$emit('blur', ev);
