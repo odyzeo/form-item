@@ -38,7 +38,8 @@ export default {
     confirmed: {
         test(value, attrs, input) {
             doPolyfill();
-            return value === input.closest('form').querySelector(`[name="${attrs[0]}"]`).value;
+            return value === input?.closest('form')
+                ?.querySelector(`[name="${attrs[0]}"]`)?.value;
         },
         message: 'Hesla sa nezhodujú.',
     },
