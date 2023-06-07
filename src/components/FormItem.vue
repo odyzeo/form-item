@@ -66,7 +66,9 @@
                     v-if="showLabel"
                     :class="$options.CLASS_NAME.label"
                 >
-                    {{ translate(input.label) }}
+                    <slot name="label">
+                        {{ translate(input.label) }}
+                    </slot>
                 </span>
             </label>
 
